@@ -32,15 +32,38 @@
         
         /* Ensure abstract text displays fully without truncation or overflow limits */
         .entry-abstract { 
-            font-size: 14px; /* ADJUSTED: Increased from 13px to 14px for better readability */
+            font-size: 14px; 
             color: #444; 
             margin-top: 5px; 
-            /* background-color: #f9f9f9;  <-- REMOVED in previous step */
-            padding: 8px; 
-            /* border-left: 3px solid #ccc; <-- REMOVED in previous step */
-            white-space: normal; /* Ensures text wraps naturally */
-            overflow: visible;  /* Ensures content is never hidden */
-            word-wrap: break-word; /* Allows long words to break to prevent horizontal scroll */
+            padding: 8px 0 0 0; 
+            white-space: normal;
+            overflow: visible;
+            word-wrap: break-word; 
+        }
+
+        /* Styling for the image in news/feature entries */
+        .entry-image {
+            float: left; 
+            margin-right: 15px; 
+            margin-bottom: 15px; 
+            max-width: 150px; 
+            height: auto;
+            border-radius: 4px;
+        }
+
+        /* Wrapper to contain the floated image and the text content */
+        .news-content-wrapper {
+            /* This property contains the float within this element's boundaries, 
+               but the float can still affect elements outside of this wrapper 
+               if they are not cleared or in a new block formatting context. */
+            display: flow-root; 
+        }
+
+        /* NEW: Class to clear the float after the news entry is complete. */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
         }
         
         /* Specialized styles */
@@ -57,7 +80,7 @@
     <div class="container">
 <ul class='entry-list'>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">IRI Financial Instruments Team</span>,
                     <span class="date">June 2024</span>.
@@ -69,55 +92,19 @@
                 
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="https://servir.icrisat.org/integrating-satellite-data-with-local-knowledge-for-community-empowerment/" target="_blank">Integrating Satellite Data with Local Knowledge for Community Empowerment</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">May 13, 2024</span>) in servir.icrisat.org
-                </span>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/integrating-satellite-data-with-local-knowledge-for-community-empowerment/" target="_blank">Integrating Satellite Data with Local Knowledge for Community Empowerment</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">May 13, 2024</span></span>
+            <li class="clearfix">
+                <img src="images/Celebrating_Women_in_Science__Sari_Blakeley.png" alt="Celebrating Women in Science: Sari Blakeley" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/celebrating-women-in-science-sari-blakeley/" target="_blank">Celebrating Women in Science: Sari Blakeley</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">February 15, 2024</span></span>
+                    </div>
+                    <div class="entry-abstract">Adapted from a story written by Olga Rukovets for the State of the Planet news site. Sari Blakeley did not always dream of a career in science. In fact, when she was younger, her understanding of “science” always involved “people in lab coats pipetting liquids over a Bunsen burner.” Over time, her perspective on science [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Original post published on the&nbsp;SERVIR news site iKON: A Game-Changer for Pastoralists in Senegal A new wave of African researchers is embracing transformative opportunities through the Small Innovation Grants Program (SIGP), implemented by SERVIR West Africa (SERVIR WA), a joint project between&nbsp;USAID&nbsp;and&nbsp;NASA,&nbsp;in partnership with&nbsp;ICRISAT,&nbsp;Manobi Africa&nbsp;and&nbsp;AIMS. Over the past two years, SIGP has served as a [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/celebrating-women-in-science-sari-blakeley/" target="_blank">Celebrating Women in Science: Sari Blakeley</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">February 15, 2024</span></span>
-                </div>
-                <div class="entry-abstract">Adapted from a story written by Olga Rukovets for the State of the Planet news site. Sari Blakeley did not always dream of a career in science. In fact, when she was younger, her understanding of “science” always involved “people in lab coats pipetting liquids over a Bunsen burner.” Over time, her perspective on science [&hellip;]</div>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.bloomberg.com/news/articles/2023-07-10/during-wildfire-hurricane-season-new-weather-insurance-could-help-homeowners?embedded-checkout=true" target="_blank">Automated Weather Insurance Could Offer Help in an Increasingly Hot World</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">July 10, 2023</span>) in bloomberg.com
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.eco-business.com/news/how-is-climate-change-limiting-access-to-insurance/" target="_blank">How is climate change limiting access to insurance?</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">June 05, 2023</span>) in eco-business.com
-                </span>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">IRI Financial Instruments Team</span>,
                     <span class="date">June 2023</span>.
@@ -129,17 +116,7 @@
                 
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.context.news/climate-risks/how-is-climate-change-limiting-access-to-insurance" target="_blank">How is climate change limiting access to insurance?</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">May 31, 2023</span>) in context.news
-                </span>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Max Mauerman, 
 Carson Rossa, 
@@ -156,7 +133,7 @@ Philemon Chelanga</span>,
                 <div class="entry-meta">Journal of Arid Environments, Elsevier.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Mitchell Thomas, 
 Elizabeth Tellman, 
@@ -175,17 +152,7 @@ Maruf Billah</span>,
                 <div class="entry-meta"> IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, IEEE.</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="https://insurancenewsnet.com/oarticle/study-findings-from-columbia-university-broaden-understanding-of-agriculture-an-information-theoretic-approach-to-reconciling-historical-climate-observations-and-impacts-on-agriculture-agriculture" target="_blank">Study Findings from Columbia University Broaden Understanding of Agriculture</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">October 25, 2022</span>) in insurancenewsnet.com
-                </span>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Max Mauerman, 
 Emily Black, 
@@ -203,36 +170,19 @@ Thabbie Chillongo</span>,
                 <div class="entry-meta">Weather, Climate and Society, AMS.</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.engineering.columbia.edu/news/using-tech-help-african-farmers-collect-payouts" target="_blank">Using Tech to Help African Farmers Collect Index Insurance Payouts</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">September 15, 2022</span>) in engineering.columbia.edu
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.cs.columbia.edu/2022/voices-of-cs-zachary-huang/" target="_blank">Voices of CS: Zachary Huang</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">August 31, 2022</span>) in cs.columbia.edu
-                </span>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/crowdsourcing-insurance/" target="_blank">Crowdsourcing to Build Better Insurance</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Francesco Fiondella on <span class="date">April 07, 2022</span></span>
+            <li class="clearfix">
+                <img src="images/Crowdsourcing_to_Build_Better_Insurance.jpeg" alt="Crowdsourcing to Build Better Insurance" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/crowdsourcing-insurance/" target="_blank">Crowdsourcing to Build Better Insurance</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Francesco Fiondella on <span class="date">April 07, 2022</span></span>
+                    </div>
+                    <div class="entry-abstract">In order to offer protective insurance to even greater numbers of smallholder farmers, in 2021 ACToday began testing mobile crowdsourcing apps that tap into the experiences and memories of farmers themselves.</div>
                 </div>
-                <div class="entry-abstract">In order to offer protective insurance to even greater numbers of smallholder farmers, in 2021 ACToday began testing mobile crowdsourcing apps that tap into the experiences and memories of farmers themselves.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Max Mauerman, 
 Elizabeth Tellman, 
@@ -251,7 +201,7 @@ Arifuzzaman Bhuyan </span>,
                 <div class="entry-meta">Springer.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">IRI Financial Instruments Team</span>,
                     <span class="date">February 2022</span>.
@@ -263,7 +213,7 @@ Arifuzzaman Bhuyan </span>,
                 
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">James Hansen, 
 Geneva List, 
@@ -285,34 +235,43 @@ Nitin Magima</span>,
                 <div class="entry-meta">Climate Risk Management, ScienceDirect.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iri-at-cop26-melody-braun-on-why-cop-matters/" target="_blank">IRI at COP26 &#8211; Mélody Braun on Why COP Matters</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Brynne Wilcox on <span class="date">November 02, 2021</span></span>
+            <li class="clearfix">
+                <img src="images/IRI_at_COP26___Mélody_Braun_on_Why_COP_Matters.jpg" alt="IRI at COP26 &#8211; Mélody Braun on Why COP Matters" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/iri-at-cop26-melody-braun-on-why-cop-matters/" target="_blank">IRI at COP26 &#8211; Mélody Braun on Why COP Matters</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Brynne Wilcox on <span class="date">November 02, 2021</span></span>
+                    </div>
+                    <div class="entry-abstract">The United Nations’ twenty-sixth Conference of the Parties, or COP26, is taking place in Glasgow, Scotland from October 30 to November 12. The COP is the largest and most important international meeting on climate change. The countries involved come together to make a number of crucial decisions to stabilize greenhouse gas emissions in order to [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">The United Nations’ twenty-sixth Conference of the Parties, or COP26, is taking place in Glasgow, Scotland from October 30 to November 12. The COP is the largest and most important international meeting on climate change. The countries involved come together to make a number of crucial decisions to stabilize greenhouse gas emissions in order to [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/in-new-project-millions-of-farmers-will-help-to-improve-insurance-against-climate-disasters/" target="_blank">In New Project, Millions of Farmers Will Help to Improve Insurance Against Climate Disasters</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">October 29, 2021</span></span>
+            <li class="clearfix">
+                <img src="images/In_New_Project__Millions_of_Farmers_Will_Help_to_I.jpg" alt="In New Project, Millions of Farmers Will Help to Improve Insurance Against Climate Disasters" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/in-new-project-millions-of-farmers-will-help-to-improve-insurance-against-climate-disasters/" target="_blank">In New Project, Millions of Farmers Will Help to Improve Insurance Against Climate Disasters</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">October 29, 2021</span></span>
+                    </div>
+                    <div class="entry-abstract">This story was originally written by Kristin French and published on the State of the Planet blog. Megafires, extreme weather, locust swarms, pandemics: These are just some of the many natural disasters that have devastated farmers in recent years, destroying livelihoods and leaving hunger in their wake. Between 2008 and 2018, disasters cost the agricultural [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">This story was originally written by Kristin French and published on the State of the Planet blog. Megafires, extreme weather, locust swarms, pandemics: These are just some of the many natural disasters that have devastated farmers in recent years, destroying livelihoods and leaving hunger in their wake. Between 2008 and 2018, disasters cost the agricultural [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/index-insurance-for-madagascars-groundnut-farmers/" target="_blank">Index Insurance for Madagascar’s Groundnut Farmers</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">October 05, 2021</span></span>
+            <li class="clearfix">
+                <img src="images/Index_Insurance_for_Madagascar_s_Groundnut_Farmers.jpg" alt="Index Insurance for Madagascar’s Groundnut Farmers" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/index-insurance-for-madagascars-groundnut-farmers/" target="_blank">Index Insurance for Madagascar’s Groundnut Farmers</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">October 05, 2021</span></span>
+                    </div>
+                    <div class="entry-abstract">by Yohana Tesfamariam Tekeste and Souha Ouni Designing financial tools and processes that help farmers bounce back from droughts and other extreme weather events is a crucial part of their strategy to adapt to longer-term climate change. The Financial Instruments Sector Team (FISTeam) of the International Research Institute for Climate and Society has been an [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">by Yohana Tesfamariam Tekeste and Souha Ouni Designing financial tools and processes that help farmers bounce back from droughts and other extreme weather events is a crucial part of their strategy to adapt to longer-term climate change. The Financial Instruments Sector Team (FISTeam) of the International Research Institute for Climate and Society has been an [&hellip;]</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Dookie D.S., 
 Osgood D.E.</span>,
@@ -325,25 +284,31 @@ Osgood D.E.</span>,
                 <div class="entry-meta">Small Island Developing States. The World of Small States, Springer, Cham..</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/insurance-tools-for-climate-adaptation-qa-with-rahel-diro/" target="_blank">Insurance Tools for Climate Adaptation: Q&#038;A with Rahel Diro</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Jacquelyn Turner on <span class="date">August 31, 2021</span></span>
+            <li class="clearfix">
+                <img src="images/Insurance_Tools_for_Climate_Adaptation__Q_A_with_R.png" alt="Insurance Tools for Climate Adaptation: Q&#038;A with Rahel Diro" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/insurance-tools-for-climate-adaptation-qa-with-rahel-diro/" target="_blank">Insurance Tools for Climate Adaptation: Q&#038;A with Rahel Diro</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Jacquelyn Turner on <span class="date">August 31, 2021</span></span>
+                    </div>
+                    <div class="entry-abstract">The world’s 570 million smallholder farmers are among the most vulnerable to the impacts of current and future climate variability and climate change. They need support and science-based strategies to make their communities resilient to these impacts and enable them to have sustainable livelihoods no matter what the climate might bring. One adaptation strategy being [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">The world’s 570 million smallholder farmers are among the most vulnerable to the impacts of current and future climate variability and climate change. They need support and science-based strategies to make their communities resilient to these impacts and enable them to have sustainable livelihoods no matter what the climate might bring. One adaptation strategy being [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/ikon-playing-to-adapt/" target="_blank">iKON: Playing to Adapt</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">August 05, 2021</span></span>
+            <li class="">
+                
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/ikon-playing-to-adapt/" target="_blank">iKON: Playing to Adapt</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">August 05, 2021</span></span>
+                    </div>
+                    <div class="entry-abstract">Climate risk instruments are designed to help farmers adapt to climate variability and change. These instruments are usually driven by data from satellites and weather stations, but these data sets can be improved over time using community-sourced observation data. Currently, such farmer data collection is limited to small-scale focus groups. However, increasing constraints on direct [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Climate risk instruments are designed to help farmers adapt to climate variability and change. These instruments are usually driven by data from satellites and weather stations, but these data sets can be improved over time using community-sourced observation data. Currently, such farmer data collection is limited to small-scale focus groups. However, increasing constraints on direct [&hellip;]</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Timm, Benjamin</span>,
                     <span class="date">July 2021</span>.
@@ -355,7 +320,7 @@ Osgood D.E.</span>,
                 
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">IRI Financial Instruments Team</span>,
                     <span class="date">July 2021</span>.
@@ -367,45 +332,31 @@ Osgood D.E.</span>,
                 
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/2021-actoday-highlight-helping-provide-insurance-to-a-million-smallholder-farmers/" target="_blank">2021 ACToday Highlight: Helping Provide Insurance to a Million Smallholder Farmers</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">May 11, 2021</span></span>
+            <li class="clearfix">
+                <img src="images/2021_ACToday_Highlight__Helping_Provide_Insurance_.jpg" alt="2021 ACToday Highlight: Helping Provide Insurance to a Million Smallholder Farmers" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/2021-actoday-highlight-helping-provide-insurance-to-a-million-smallholder-farmers/" target="_blank">2021 ACToday Highlight: Helping Provide Insurance to a Million Smallholder Farmers</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">May 11, 2021</span></span>
+                    </div>
+                    <div class="entry-abstract">This story was published as part of the Adapting Agriculture to Climate Today, for Tomorrow (ACToday) Columbia World Project 2021 Report. Read the full report here. Since its launch in 2017, ACToday has invested in forecasts, monitoring tools and other information products to help government agencies, humanitarian organizations and farmers better plan for droughts and [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">This story was published as part of the Adapting Agriculture to Climate Today, for Tomorrow (ACToday) Columbia World Project 2021 Report. Read the full report here. Since its launch in 2017, ACToday has invested in forecasts, monitoring tools and other information products to help government agencies, humanitarian organizations and farmers better plan for droughts and [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/improving-risk-indicators-introducing-the-next-generation-drought-index-project/" target="_blank">Improving Risk Indicators: Introducing the Next Generation Drought Index Project</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Jacquelyn Turner on <span class="date">March 11, 2021</span></span>
+            <li class="clearfix">
+                <img src="images/Improving_Risk_Indicators__Introducing_the_Next_Ge.jpg" alt="Improving Risk Indicators: Introducing the Next Generation Drought Index Project" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/improving-risk-indicators-introducing-the-next-generation-drought-index-project/" target="_blank">Improving Risk Indicators: Introducing the Next Generation Drought Index Project</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Jacquelyn Turner on <span class="date">March 11, 2021</span></span>
+                    </div>
+                    <div class="entry-abstract">Across the globe, food security continues to be a significant challenge, one that is estimated to increase with the compounding factors of the COVID-19 pandemic and climate change. The Next Generation Drought Index (NGDI) project addresses this challenge by leveraging satellite technology and drought modeling to provide&nbsp;humanitarian and development agencies&nbsp;access to the latest and most [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Across the globe, food security continues to be a significant challenge, one that is estimated to increase with the compounding factors of the COVID-19 pandemic and climate change. The Next Generation Drought Index (NGDI) project addresses this challenge by leveraging satellite technology and drought modeling to provide&nbsp;humanitarian and development agencies&nbsp;access to the latest and most [&hellip;]</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.reuters.com/article/heatwave-insurance-climatechange/analysis-as-cities-bake-on-a-warming-planet-insurers-cook-up-heatwave-cover-idUSL8N2GS56K" target="_blank">Analysis: As cities bake on a warming planet insurers cook up heatwave cover</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">January 20, 2021</span>) in reuters.com
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.asiainsurancereview.com/News/View-NewsLetter-Article/id/72453/Type/eDaily/Bangladesh-Climate-risk-insurance-gets-major-boost" target="_blank">Bangladesh: Climate risk insurance gets major boost</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">January 04, 2021</span>) in asiainsurancereview.com
-                </span>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">J. Nicolas Hernandez-Aguilera, 
 Weston Anderson, 
@@ -424,7 +375,7 @@ Andy Stock</span>,
                 <div class="entry-meta">Nat Sustain, Nature.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Denyse S. Dookie, 
 Daniel Osgood</span>,
@@ -437,7 +388,7 @@ Daniel Osgood</span>,
                 <div class="entry-meta">SSRN.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Ho Lun Wong, 
 Xiangdong Wei, 
@@ -455,7 +406,7 @@ Rahel Diro</span>,
                 <div class="entry-meta">World Development, Elsevier.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Hernandez- Aguilera, J.N.; , 
 Mauerman, , 
@@ -475,7 +426,7 @@ Osgood, D.</span>,
                 <div class="entry-meta">Games.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">M. Enenkel, 
 M.E. Brown, 
@@ -501,7 +452,7 @@ P. Vinck</span>,
                 <div class="entry-meta">Climatic Change, Springer.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Blakeley, S.L., 
 Sweeney, S., 
@@ -519,7 +470,7 @@ Osgood, D.E.</span>,
                 <div class="entry-meta">Remote Sens..</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">J. Nicolas Hernandez-Aguilera, 
 Mauerman, Max, 
@@ -533,44 +484,31 @@ Osgood, Daniel</span>,
                 <div class="entry-meta">SSRN, SSRN.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/climate-risk-insurance-for-colombias-smallholder-rice-farmers/" target="_blank">Climate Risk Insurance for Colombia&#8217;s Smallholder Rice Farmers</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Francesco Fiondella on <span class="date">May 29, 2020</span></span>
+            <li class="clearfix">
+                <img src="images/Climate_Risk_Insurance_for_Colombia_s_Smallholder_.jpg" alt="Climate Risk Insurance for Colombia&#8217;s Smallholder Rice Farmers" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/climate-risk-insurance-for-colombias-smallholder-rice-farmers/" target="_blank">Climate Risk Insurance for Colombia&#8217;s Smallholder Rice Farmers</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Francesco Fiondella on <span class="date">May 29, 2020</span></span>
+                    </div>
+                    <div class="entry-abstract">The Adapting Agriculture to Climate Today, for Tomorrow (ACToday) Columbia World Project has helped create advanced and sustainable climate services around the world tailored for agricultural decision making. Countries are using these new services to manage many of the climate-related risks to their food systems. But even the best climate services by themselves cannot manage [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">The Adapting Agriculture to Climate Today, for Tomorrow (ACToday) Columbia World Project has helped create advanced and sustainable climate services around the world tailored for agricultural decision making. Countries are using these new services to manage many of the climate-related risks to their food systems. But even the best climate services by themselves cannot manage [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/actoday-experts-take-part-in-panel-on-climate-and-food-security/" target="_blank">ACToday Experts Take Part in Panel on Climate and Food Security</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">May 18, 2020</span></span>
+            <li class="clearfix">
+                <img src="images/ACToday_Columbia_World_Project_enabling_insurance_.jpg" alt="ACToday Columbia World Project enabling insurance to reach a million farmers in Ethiopia" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/actoday-enabling-insurance-to-reach-a-million-farmers-in-ethiopia/" target="_blank">ACToday Columbia World Project enabling insurance to reach a million farmers in Ethiopia</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Francesco Fiondella on <span class="date">April 07, 2020</span></span>
+                    </div>
+                    <div class="entry-abstract">The Adapting Agriculture to Climate Today, for Tomorrow Columbia World Project (ACToday) has been working with its Ethiopian partners to create new climate tools for decision makers working in agriculture and food security. These investments are now directly enabling the World Food Programme (WFP) to reach its 2022 target of providing a million smallholder farmers in Ethiopia with affordable insurance against droughts and other climate risks.</div>
                 </div>
-                <div class="entry-abstract">Adapted from a news story by Columbia World Projects. Scientists and other experts from the Adapting Agriculture to Climate Today, for Tomorrow (ACToday) Project, joined former New York Times journalist Andrew Revkin for an online web seminar on May 7 to discuss the intersection of food, climate and coronavirus. The event – “Feeding Humanity as [&hellip;]</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="http://www.ilstv.com/what-happens-when-natural-disaster-strikes-during-a-pandemic/" target="_blank">What Happens When Natural Disaster Strikes During a Pandemic?</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">April 24, 2020</span>) in ilstv.com
-                </span>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/actoday-enabling-insurance-to-reach-a-million-farmers-in-ethiopia/" target="_blank">ACToday Columbia World Project enabling insurance to reach a million farmers in Ethiopia</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Francesco Fiondella on <span class="date">April 07, 2020</span></span>
-                </div>
-                <div class="entry-abstract">The Adapting Agriculture to Climate Today, for Tomorrow Columbia World Project (ACToday) has been working with its Ethiopian partners to create new climate tools for decision makers working in agriculture and food security. These investments are now directly enabling the World Food Programme (WFP) to reach its 2022 target of providing a million smallholder farmers in Ethiopia with affordable insurance against droughts and other climate risks.</div>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Vasilaky, K., 
 Sáenz, S.M., 
@@ -585,43 +523,43 @@ Osgood, D.</span>,
                 <div class="entry-meta">Games, MDPI.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/crossing-the-predictability-desert/" target="_blank">IRI@AGU: Crossing the &#8216;Predictability Desert&#8217;</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Jacquelyn Turner on <span class="date">December 09, 2019</span></span>
+            <li class="clearfix">
+                <img src="images/IRI_AGU__Crossing_the__Predictability_Desert.jpg" alt="IRI@AGU: Crossing the &#8216;Predictability Desert&#8217;" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/crossing-the-predictability-desert/" target="_blank">IRI@AGU: Crossing the &#8216;Predictability Desert&#8217;</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Jacquelyn Turner on <span class="date">December 09, 2019</span></span>
+                    </div>
+                    <div class="entry-abstract">Until recently, predicting rainfall and temperature at the subseasonal timescale (i.e. between two weeks and three months) was considered impossible. That’s beginning to change, thanks to the efforts of IRI&#8217;s Andrew Robertson, the head of IRI&#8217;s climate group and co-chair of the steering group of the Subseasonal to Seasonal (S2S) Prediction Project. &nbsp;In the Q&amp;A [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Until recently, predicting rainfall and temperature at the subseasonal timescale (i.e. between two weeks and three months) was considered impossible. That’s beginning to change, thanks to the efforts of IRI&#8217;s Andrew Robertson, the head of IRI&#8217;s climate group and co-chair of the steering group of the Subseasonal to Seasonal (S2S) Prediction Project. &nbsp;In the Q&amp;A [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iri-agu-2019/" target="_blank">IRI@AGU: Schedule of Events 2019</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Carla Pena Singson on <span class="date">December 04, 2019</span></span>
+            <li class="clearfix">
+                <img src="images/IRI_AGU__Focusing_on_Floods.png" alt="IRI@AGU: Focusing on Floods" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/focusing-on-floods/" target="_blank">IRI@AGU: Focusing on Floods</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Jacquelyn Turner on <span class="date">December 03, 2019</span></span>
+                    </div>
+                    <div class="entry-abstract">Often considered one of the most revolutionary technologies for climate research, remote sensing has the capacity to vastly improve the predictive strength of a wide variety of forecasting methodologies. &nbsp;However, this is still a rapidly-growing field and continuing to evaluate and cross-reference remote sensing data against other data-gathering methods is necessary to improve accuracy, a [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">A range of IRI’s areas of expertise will be represented at this year’s annual meeting of the American Geophysical Union (AGU). Below is the schedule of IRI&#8217;s posters and presentations in sequential order. SUNDAY, DECEMBER 8 World Climate Research Programme 40th Anniversary Symposium Lisa Goddard WCRP is celebrating its 40th year of international climate science. We [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/focusing-on-floods/" target="_blank">IRI@AGU: Focusing on Floods</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Jacquelyn Turner on <span class="date">December 03, 2019</span></span>
+            <li class="clearfix">
+                <img src="images/ACToday_Q_A__J._Nicolás_Hernandez-Aguilera_on_Coff.jpg" alt="ACToday Q&amp;A: J. Nicolás Hernandez-Aguilera on Coffee and Climate" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/actoday-nicolas-coffee-and-climate/" target="_blank">ACToday Q&amp;A: J. Nicolás Hernandez-Aguilera on Coffee and Climate</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Carla Pena Singson on <span class="date">September 04, 2019</span></span>
+                    </div>
+                    <div class="entry-abstract">IRI's Juan Nicolás Hernandez-Aguilera discusses his research on sustainable coffee production. Originally from Colombia, his interest in the stark contrast between Colombia’s natural resource wealth and high levels of inequality, rural violence and deforestation has manifested in feeling a “responsibility to bring research toward action.”</div>
                 </div>
-                <div class="entry-abstract">Often considered one of the most revolutionary technologies for climate research, remote sensing has the capacity to vastly improve the predictive strength of a wide variety of forecasting methodologies. &nbsp;However, this is still a rapidly-growing field and continuing to evaluate and cross-reference remote sensing data against other data-gathering methods is necessary to improve accuracy, a [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/actoday-nicolas-coffee-and-climate/" target="_blank">ACToday Q&amp;A: J. Nicolás Hernandez-Aguilera on Coffee and Climate</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Carla Pena Singson on <span class="date">September 04, 2019</span></span>
-                </div>
-                <div class="entry-abstract">IRI's Juan Nicolás Hernandez-Aguilera discusses his research on sustainable coffee production. Originally from Colombia, his interest in the stark contrast between Colombia’s natural resource wealth and high levels of inequality, rural violence and deforestation has manifested in feeling a “responsibility to bring research toward action.”</div>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Manuel Brahm, 
 Daniel Vila, 
@@ -636,7 +574,7 @@ Daniel Osgood</span>,
                 <div class="entry-meta">Meteorological Applications.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Kathryn Vasilaky, 
 Rahel Diro , 
@@ -652,34 +590,19 @@ Daniel Osgood</span>,
                 <div class="entry-meta">The Journal of development studies, Taylor & Francis Group.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iri-agu-lessening-the-impacts-of-climate-shocks-to-agriculture/" target="_blank">IRI@AGU: Lessening the Impacts of Climate Shocks to Agriculture</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Jacquelyn Turner on <span class="date">December 10, 2018</span></span>
+            <li class="clearfix">
+                <img src="images/IRI_AGU__Farmers__Perceptions_as_Data.jpg" alt="IRI@AGU: Farmers&#8217; Perceptions as Data" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/iri-agu-farmer-perceptions-as-data/" target="_blank">IRI@AGU: Farmers&#8217; Perceptions as Data</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Jacquelyn Turner on <span class="date">December 07, 2018</span></span>
+                    </div>
+                    <div class="entry-abstract">As our climate continues to change, it becomes increasingly important to consider the effects this will have around the world, especially in developing countries where many small farmers already struggle. &nbsp;For more than 10 years, researchers at IRI have been developing index insurance, which would provide a safety net for farmers who experience devastating climate [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">In this video, IRI&#8217;s director, Lisa Goddard, discusses two innovations IRI has helped develop to reduce the potential impacts of droughts and extreme weather on vulnerable communities around the world: climate-based index insurance for smallholder farmers in Africa and forecast-based financing for the World Food Programme. Lisa Goddard&#8211; Climate Variability, Index Insurance &amp; Forecast-based Financing [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iri-agu-farmer-perceptions-as-data/" target="_blank">IRI@AGU: Farmers&#8217; Perceptions as Data</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Jacquelyn Turner on <span class="date">December 07, 2018</span></span>
-                </div>
-                <div class="entry-abstract">As our climate continues to change, it becomes increasingly important to consider the effects this will have around the world, especially in developing countries where many small farmers already struggle. &nbsp;For more than 10 years, researchers at IRI have been developing index insurance, which would provide a safety net for farmers who experience devastating climate [&hellip;]</div>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iri-agu-schedule-of-events-2018/" target="_blank">IRI@AGU: Schedule of Events 2018</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">December 06, 2018</span></span>
-                </div>
-                <div class="entry-abstract">A range of IRI’s areas of expertise will be represented at this year’s annual meeting of the American Geophysical Union (AGU). Below is the schedule of IRI&#8217;s posters and presentations in sequential order. MONDAY Climate Services Research and Development: Adapting to Climate Today Lisa M Goddard is the primary convener for both a presentation and poster [&hellip;]</div>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Markus Enenkel , 
 Carlos Farah, 
@@ -698,7 +621,7 @@ Daniel Osgood 1</span>,
                 <div class="entry-meta">Remote Sensing , MDPI.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Daniel Osgood , 
 Bristol Powell , 
@@ -719,46 +642,19 @@ Jessica L. McCarty</span>,
                 <div class="entry-meta">Remote Sensing , MDPI.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/after-ten-years-of-index-insurance-whats-next/" target="_blank">After Ten Years of Index Insurance, What&#8217;s Next?</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">October 16, 2018</span></span>
+            <li class="clearfix">
+                <img src="images/After_Ten_Years_of_Index_Insurance__What_s_Next.png" alt="After Ten Years of Index Insurance, What&#8217;s Next?" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/after-ten-years-of-index-insurance-whats-next/" target="_blank">After Ten Years of Index Insurance, What&#8217;s Next?</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">October 16, 2018</span></span>
+                    </div>
+                    <div class="entry-abstract">Despite an overabundance of food in some parts of the world, about 815 million people suffered from chronic undernourishment in 2016. Poor nutrition leads to nearly half of deaths in children under the age of five. Many of those who are hungry are farmers and their families. Our food systems clearly aren’t working as well [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Despite an overabundance of food in some parts of the world, about 815 million people suffered from chronic undernourishment in 2016. Poor nutrition leads to nearly half of deaths in children under the age of five. Many of those who are hungry are farmers and their families. Our food systems clearly aren’t working as well [&hellip;]</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.eesi.org/articles/view/climate-and-agriculture-from-local-to-global-impacts" target="_blank">Climate and agriculture: From local to global impacts</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">September 17, 2018</span>) in eesi.org
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="http://agfax.com/2018/09/04/a-global-index-insurance-design-for-agriculture/" target="_blank">A global index insurance design for agriculture</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">September 04, 2018</span>) in agfax.com
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.engineering.columbia.edu/news/global-index-insurance-design-agriculture" target="_blank">A global index insurance design for agriculture</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">August 20, 2018</span>) in engineering.columbia.edu
-                </span>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">MARKUS ENENKEL, 
 DANIEL OSGOOD, 
@@ -780,44 +676,19 @@ MOLLY BROWN</span>,
                 <div class="entry-meta">Weather, Climate, and Society, American Meteorological Society.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/upping-our-game/" target="_blank">Upping Our Game: Crop Insurance Project Proves Wildly Successful</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">March 06, 2018</span></span>
+            <li class="clearfix">
+                <img src="images/Upping_Our_Game__Crop_Insurance_Project_Proves_Wil.jpg" alt="Upping Our Game: Crop Insurance Project Proves Wildly Successful" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/upping-our-game/" target="_blank">Upping Our Game: Crop Insurance Project Proves Wildly Successful</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">March 06, 2018</span></span>
+                    </div>
+                    <div class="entry-abstract">A weather index insurance tool is graduating from research project to commercial product. Using multimedia and infographics, a new story puts the technical process in the context of its real-world impact. Find out how the International Research Institute for Climate and Society&#8217;s Financial Instruments Sector team pulled it off, and how the project could be [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">A weather index insurance tool is graduating from research project to commercial product. Using multimedia and infographics, a new story puts the technical process in the context of its real-world impact. Find out how the International Research Institute for Climate and Society&#8217;s Financial Instruments Sector team pulled it off, and how the project could be [&hellip;]</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.business-standard.com/article/finance/india-parametric-insurance-for-agricultural-risks-a-way-forward-118020800049_1.html" target="_blank">India: Parametric insurance for agricultural risks – A way forward</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">February 08, 2018</span>) in business-standard.com
-                </span>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/the-big-idea-farsighted-forecasts/" target="_blank">The Big Idea: Farsighted Forecasts</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by David Craig on <span class="date">December 15, 2017</span></span>
-                </div>
-                <div class="entry-abstract">Lisa Goddard directs Columbia’s International Research Institute for Climate and Society (IRI), which helps developing countries anticipate and manage the impacts of climate change. Columbia Magazine asked her to explain how climate scientists can predict weather patterns months in advance, and how their work is improving people’s lives. Columbia Magazine: IRI is at the forefront [&hellip;]</div>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iri-agu-schedule-of-events-2017/" target="_blank">IRI@AGU: Schedule of Events 2017</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">December 07, 2017</span></span>
-                </div>
-                <div class="entry-abstract">A range of IRI’s areas of expertise will be represented at this year’s annual meeting of the American Geophysical Union (AGU). One scientist will present on a tool for supporting decision making in agriculture. Another presentation focuses on improving our fundamental ability to predict tropical cyclones. Security under changing conditions is a major theme in [&hellip;]</div>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Markus Enenkel , 
 Daniel Osgood, 
@@ -831,27 +702,7 @@ Bristol Powell</span>,
                 <div class="entry-meta">CRC Press.</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.youtube.com/watch?v=W0-h30v-H0Y" target="_blank">New IRI research on agricultural index insurance in Africa</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">June 15, 2017</span>) in youtube.com
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="https://www.agri-business.com/agribusiness-news/agricultural-insurance-can-technology-boost-the-safety-net" target="_blank">Agricultural Insurance: Can Technology Boost the Safety Net?</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">June 12, 2017</span>) in agri-business.com
-                </span>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Hellin, Jon, 
 Hansen, James W, 
@@ -866,73 +717,55 @@ Braun, Melody</span>,
                 <div class="entry-meta">CGIAR Research Program on Climate, Agriculture and Food Security.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/enacts-transforms-insurance-projects-in-africa/" target="_blank">New Climate Data Transforms Insurance Projects in Africa</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">April 12, 2017</span></span>
+            <li class="clearfix">
+                <img src="images/New_Climate_Data_Transforms_Insurance_Projects_in_.jpg" alt="New Climate Data Transforms Insurance Projects in Africa" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/enacts-transforms-insurance-projects-in-africa/" target="_blank">New Climate Data Transforms Insurance Projects in Africa</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">April 12, 2017</span></span>
+                    </div>
+                    <div class="entry-abstract">By Dan Osgood, Lead Scientist, IRI Financial Instruments Sector Team Small farms are vulnerable to climate risk, but most smallholder farmers around the world don’t have access to insurance and other financial tools to manage fluctuations in climate. Over the past decade we’ve put a great deal of effort into a new kind of insurance&#8211;index insurance&#8211;that [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">By Dan Osgood, Lead Scientist, IRI Financial Instruments Sector Team Small farms are vulnerable to climate risk, but most smallholder farmers around the world don’t have access to insurance and other financial tools to manage fluctuations in climate. Over the past decade we’ve put a great deal of effort into a new kind of insurance&#8211;index insurance&#8211;that [&hellip;]</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="http://news.columbia.edu/tag/index-insurance-for-agriculture" target="_blank">Index Insurance for Agriculture</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">March 24, 2017</span>) in news.columbia.edu
-                </span>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/financial-instruments-sector-team-launches-new-trade-blog/" target="_blank">Financial Instruments Sector Team Launches New &#8220;Trade Blog&#8221;</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">February 16, 2017</span></span>
+            <li class="clearfix">
+                <img src="images/Financial_Instruments_Sector_Team_Launches_New__Tr.png" alt="Financial Instruments Sector Team Launches New &#8220;Trade Blog&#8221;" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/financial-instruments-sector-team-launches-new-trade-blog/" target="_blank">Financial Instruments Sector Team Launches New &#8220;Trade Blog&#8221;</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">February 16, 2017</span></span>
+                    </div>
+                    <div class="entry-abstract">The Financial Instruments Sector Team has launched a new publication on Medium, called Inside Index Insurance. The purpose of the publication is to provide a range of content types from team members &#8211; from quick dispatches from activities around the world to in-depth analysis of the technical components of financial instruments. &#8220;I&#8217;ve always wanted to know more about what [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">The Financial Instruments Sector Team has launched a new publication on Medium, called Inside Index Insurance. The purpose of the publication is to provide a range of content types from team members &#8211; from quick dispatches from activities around the world to in-depth analysis of the technical components of financial instruments. &#8220;I&#8217;ve always wanted to know more about what [&hellip;]</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="http://blogs.ei.columbia.edu/2017/02/09/qa-using-climate-data-to-protect-farmers-against-shocks/" target="_blank">Q&A: Using Climate Data to Protect Farmers Against Shocks</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">February 09, 2017</span>) in blogs.ei.columbia.edu
-                </span>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iri-agu-schedule-of-events-2016/" target="_blank">IRI@AGU: Schedule of Events 2016</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">December 09, 2016</span></span>
+            <li class="clearfix">
+                <img src="images/IRI_AGU__Schedule_of_Events_2016.jpg" alt="IRI@AGU: Schedule of Events 2016" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/iri-agu-schedule-of-events-2016/" target="_blank">IRI@AGU: Schedule of Events 2016</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">December 09, 2016</span></span>
+                    </div>
+                    <div class="entry-abstract">A range of IRI’s areas of expertise will be represented at this year’s annual meeting of the American Geophysical Union (AGU). Many of the presentations center on fundamental climate science, including analyses of the influence of climate variability and change on rainfall in the US, Iran, South America and the Sahel, as well as the [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">A range of IRI’s areas of expertise will be represented at this year’s annual meeting of the American Geophysical Union (AGU). Many of the presentations center on fundamental climate science, including analyses of the influence of climate variability and change on rainfall in the US, Iran, South America and the Sahel, as well as the [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/new-climate-data-in-zambia-unlocks-insurance-opportunities/" target="_blank">New Climate Data in Zambia Unlocks Insurance Opportunities</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Mélody Braun on <span class="date">November 22, 2016</span></span>
+            <li class="clearfix">
+                <img src="images/New_Climate_Data_in_Zambia_Unlocks_Insurance_Oppor.jpg" alt="New Climate Data in Zambia Unlocks Insurance Opportunities" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/new-climate-data-in-zambia-unlocks-insurance-opportunities/" target="_blank">New Climate Data in Zambia Unlocks Insurance Opportunities</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Mélody Braun on <span class="date">November 22, 2016</span></span>
+                    </div>
+                    <div class="entry-abstract">In mid September, IRI staff helped launch an innovative new data platform in Lusaka, Zambia that combines satellite rainfall estimates with the country’s existing network of rain gauges. The platform, developed with the Zambia Meteorological Department and through funding from NASA, is the latest to come out of IRI’s Enhancing National Climate Services (ENACTS) initiative [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">In mid September, IRI staff helped launch an innovative new data platform in Lusaka, Zambia that combines satellite rainfall estimates with the country’s existing network of rain gauges. The platform, developed with the Zambia Meteorological Department and through funding from NASA, is the latest to come out of IRI’s Enhancing National Climate Services (ENACTS) initiative [&hellip;]</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="http://www.earthzine.org/2016/11/17/better-index-insurance-for-farmers/" target="_blank">Better Index Insurance for Farmers</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">November 17, 2016</span>) in earthzine.org
-                </span>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Bristol Powell, 
 Manuel Brahm</span>,
@@ -945,65 +778,31 @@ Manuel Brahm</span>,
                 
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="http://insurancenewsnet.com/oarticle/study-findings-from-columbia-university-broaden-understanding-of-agriculture-an-information-theoretic-approach-to-reconciling-historical-climate-observations-and-impacts-on-agriculture-agriculture" target="_blank">Study findings from Columbia University Broaden Understanding of Agriculture</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">September 21, 2016</span>) in insurancenewsnet.com
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="http://www.columbia.edu/content/better-index-insurance-farmers" target="_blank">Better Index Insurance for Farmers</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">September 19, 2016</span>) in columbia.edu
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="http://www.sciencemag.org/content/353/6304/1105.summary" target="_blank">Better Index Insurance for Farmers</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">September 09, 2016</span>) in sciencemag.org
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="http://blogs.ei.columbia.edu/2016/08/18/qa-the-importance-of-climate-in-agriculture/" target="_blank">Q&A: The Importance of Climate in Agriculture</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">August 18, 2016</span>) in blogs.ei.columbia.edu
-                </span>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/remote-sensing-and-index-insurance-finding-a-common-language/" target="_blank">Remote Sensing and Index Insurance: Finding a Common Language</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">August 10, 2016</span></span>
+            <li class="clearfix">
+                <img src="images/Remote_Sensing_and_Index_Insurance__Finding_a_Comm.jpg" alt="Remote Sensing and Index Insurance: Finding a Common Language" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/remote-sensing-and-index-insurance-finding-a-common-language/" target="_blank">Remote Sensing and Index Insurance: Finding a Common Language</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">August 10, 2016</span></span>
+                    </div>
+                    <div class="entry-abstract">by Bristol Powell &amp; Helen Greatrex, Financial Instruments Sector Team   Satellite products could give index insurance projects the scaling power they seek, but challenges remain. A workshop held earlier this year addressed these challenges head on. Index insurance is innovative, but can it reach a critical mass? Until recently, many have doubted that index insurance could scale [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">by Bristol Powell &amp; Helen Greatrex, Financial Instruments Sector Team   Satellite products could give index insurance projects the scaling power they seek, but challenges remain. A workshop held earlier this year addressed these challenges head on. Index insurance is innovative, but can it reach a critical mass? Until recently, many have doubted that index insurance could scale [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/ethiopiar4drought/" target="_blank">25,000 Insured Ethiopian Farmers Receive Payments for El Niño Droughts</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">July 01, 2016</span></span>
+            <li class="">
+                
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/ethiopiar4drought/" target="_blank">25,000 Insured Ethiopian Farmers Receive Payments for El Niño Droughts</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">July 01, 2016</span></span>
+                    </div>
+                    <div class="entry-abstract">By Daniel Osgood More than 25,000 insured farming families in Ethiopia have received payments for crop loss and damages after a year of devastating drought caused in large part by the 2015 El Niño. The farmers purchased the insurance through the R4 Rural Resilience Initiative [latest report], run by the World Food Program and Oxfam America. [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">By Daniel Osgood More than 25,000 insured farming families in Ethiopia have received payments for crop loss and damages after a year of devastating drought caused in large part by the 2015 El Niño. The farmers purchased the insurance through the R4 Rural Resilience Initiative [latest report], run by the World Food Program and Oxfam America. [&hellip;]</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">David Estrin, CIGI, 
 Sue Vern Tan, CIGI, 
@@ -1022,44 +821,31 @@ Dominique Souris</span>,
                 <div class="entry-meta">Centre for International Governance Innovation.</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="http://blogs.ei.columbia.edu/2016/04/14/insurance-for-africas-rain-fed-farmers/" target="_blank">Insurance for Africa’s Rain-fed Farmers</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">April 14, 2016</span>) in blogs.ei.columbia.edu
-                </span>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/el-nino-2015-conference-report/" target="_blank">El Niño 2015 Conference Report</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">April 06, 2016</span></span>
+            <li class="clearfix">
+                <img src="images/El_Niño_2015_Conference_Report.png" alt="El Niño 2015 Conference Report" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/el-nino-2015-conference-report/" target="_blank">El Niño 2015 Conference Report</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">April 06, 2016</span></span>
+                    </div>
+                    <div class="entry-abstract">In November 2015, the International Research Institute for Climate and Society at Columbia University, in collaboration with the World Meteorological Organization, the U.S. Agency for International Development and the U.S. National Oceanic and Atmospheric Administration, convened the El Niño 2015 Conference. The report from this conference is now available. In addition to recordings and summaries of the [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">In November 2015, the International Research Institute for Climate and Society at Columbia University, in collaboration with the World Meteorological Organization, the U.S. Agency for International Development and the U.S. National Oceanic and Atmospheric Administration, convened the El Niño 2015 Conference. The report from this conference is now available. In addition to recordings and summaries of the [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/farmers-receive-insurance-payouts-in-senegal/" target="_blank">Farmers receive insurance payouts in Senegal</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">April 05, 2016</span></span>
+            <li class="clearfix">
+                <img src="images/Farmers_receive_insurance_payouts_in_Senegal.jpg" alt="Farmers receive insurance payouts in Senegal" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/farmers-receive-insurance-payouts-in-senegal/" target="_blank">Farmers receive insurance payouts in Senegal</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">April 05, 2016</span></span>
+                    </div>
+                    <div class="entry-abstract">In Tambacounda, Senegal, small-scale farmers rely on sufficient and steady rainfall at key times of the growing season. As climate change leads to increased irregularity and intensity of rainfall events, the adaptation strategies employed by farmers to cope with shocks do not always suffice. The fear of poor productivity in a year often prevents them from [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">In Tambacounda, Senegal, small-scale farmers rely on sufficient and steady rainfall at key times of the growing season. As climate change leads to increased irregularity and intensity of rainfall events, the adaptation strategies employed by farmers to cope with shocks do not always suffice. The fear of poor productivity in a year often prevents them from [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iriams-2016-schedule-of-events/" target="_blank">IRI@AMS 2016: Schedule of Events</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Francesco Fiondella on <span class="date">January 08, 2016</span></span>
-                </div>
-                <div class="entry-abstract">From crowd-sourcing tornado data to teaching Harlem high-school students about climate change and climate justice, IRI scientists will be sharing a number of fascinating projects at the annual meeting of the American Meteorological Society (AMS) next week in New Orleans.  Below is a schedule of their presentations and posters. Presenting authors appear in bold. Crowd-Sourcing the Storm: A New [&hellip;]</div>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Shirley, Kenneth, 
 Vasilaky, Kathryn N., 
@@ -1074,43 +860,55 @@ Osgood, Daniel E.</span>,
                 
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/video-what-tools-do-honduran-farmers-want-for-climate-risk/" target="_blank">VIDEO: What tools do Honduran farmers want for climate risk?</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">December 17, 2015</span></span>
+            <li class="clearfix">
+                <img src="images/VIDEO__What_tools_do_Honduran_farmers_want_for_cli.jpg" alt="VIDEO: What tools do Honduran farmers want for climate risk?" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/video-what-tools-do-honduran-farmers-want-for-climate-risk/" target="_blank">VIDEO: What tools do Honduran farmers want for climate risk?</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">December 17, 2015</span></span>
+                    </div>
+                    <div class="entry-abstract">Text by Sofía Martínez Video by Elisabeth Gawthrop, Sofía Martínez and Courtney St. John Answers from insurance research La version en español esta disponible aquí.  During the first of the two growing seasons of 2015, grain farmers in El Paraíso, Honduras faced one of the worst droughts in history, with losses ranging from 60 to 100% [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Text by Sofía Martínez Video by Elisabeth Gawthrop, Sofía Martínez and Courtney St. John Answers from insurance research La version en español esta disponible aquí.  During the first of the two growing seasons of 2015, grain farmers in El Paraíso, Honduras faced one of the worst droughts in history, with losses ranging from 60 to 100% [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/cuales-herramientas-quieren-los-productores-hondurenos-para-el-riesgo-climatico/" target="_blank">¿Cuáles herramientas quieren los productores hondureños para el riesgo climático?</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">December 17, 2015</span></span>
+            <li class="clearfix">
+                <img src="images/Cuáles_herramientas_quieren_los_productores_hondur.jpg" alt="¿Cuáles herramientas quieren los productores hondureños para el riesgo climático?" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/cuales-herramientas-quieren-los-productores-hondurenos-para-el-riesgo-climatico/" target="_blank">¿Cuáles herramientas quieren los productores hondureños para el riesgo climático?</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">December 17, 2015</span></span>
+                    </div>
+                    <div class="entry-abstract">Texto por Sofía Martínez Video por Elisabeth Gawthrop, Sofía Martínez and Courtney St. John Respuestas de la investigación English version available here.  Durante las dos temporadas agrícolas del 2015, los productores de granos básicos de El Paraíso, Honduras se enfrentaron a una de las peores sequías en la historia, con pérdidas desde un 60 hasta [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Texto por Sofía Martínez Video por Elisabeth Gawthrop, Sofía Martínez and Courtney St. John Respuestas de la investigación English version available here.  Durante las dos temporadas agrícolas del 2015, los productores de granos básicos de El Paraíso, Honduras se enfrentaron a una de las peores sequías en la historia, con pérdidas desde un 60 hasta [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iri-agu-schedule-of-events-2015/" target="_blank">IRI@AGU: Schedule of Events 2015</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">December 10, 2015</span></span>
+            <li class="clearfix">
+                <img src="images/IRI_AGU__Schedule_of_Events_2015.jpg" alt="IRI@AGU: Schedule of Events 2015" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/iri-agu-schedule-of-events-2015/" target="_blank">IRI@AGU: Schedule of Events 2015</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">December 10, 2015</span></span>
+                    </div>
+                    <div class="entry-abstract">The IRI has seven scientists and staff presenting on a wide range of topics at the American Geophysical Union (AGU) Meeting this year. Andrew Robertson and Alexis Berg will present advancements in our fundamental understanding of earth&#8217;s systems. Eunjin Han, Pietro Ceccato and Pradipta Parhi will discuss methods for using our climate knowledge for applications in agriculture, health and [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">The IRI has seven scientists and staff presenting on a wide range of topics at the American Geophysical Union (AGU) Meeting this year. Andrew Robertson and Alexis Berg will present advancements in our fundamental understanding of earth&#8217;s systems. Eunjin Han, Pietro Ceccato and Pradipta Parhi will discuss methods for using our climate knowledge for applications in agriculture, health and [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/cr_animation/" target="_blank">Climate Resilience (Animation)</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">December 05, 2015</span></span>
+            <li class="clearfix">
+                <img src="images/Climate_Resilience__Animation.png" alt="Climate Resilience (Animation)" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/cr_animation/" target="_blank">Climate Resilience (Animation)</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">December 05, 2015</span></span>
+                    </div>
+                    <div class="entry-abstract">Climate resilience: it’s the ability for communities to recover from the impacts of climate events. It’s the difference between weather being manageable&#8230;or a catastrophe. But for many parts of the world, where livelihoods depend so much on the climate, critical weather and climate information is unavailable or unusable. The International Research Institute for Climate and [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Climate resilience: it’s the ability for communities to recover from the impacts of climate events. It’s the difference between weather being manageable&#8230;or a catastrophe. But for many parts of the world, where livelihoods depend so much on the climate, critical weather and climate information is unavailable or unusable. The International Research Institute for Climate and [&hellip;]</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Osgood, Daniel</span>,
                     <span class="date">December 2015</span>.
@@ -1122,84 +920,43 @@ Osgood, Daniel E.</span>,
                 
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iri-climate-week-nyc-2015/" target="_blank">IRI @ Climate Week NYC 2015</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Francesco Fiondella on <span class="date">September 15, 2015</span></span>
+            <li class="clearfix">
+                <img src="images/IRI___Climate_Week_NYC_2015.gif" alt="IRI @ Climate Week NYC 2015" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/iri-climate-week-nyc-2015/" target="_blank">IRI @ Climate Week NYC 2015</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Francesco Fiondella on <span class="date">September 15, 2015</span></span>
+                    </div>
+                    <div class="entry-abstract">Staff members from the International Research Institute for Climate and Society (IRI) are participating in a number of high-level events during Climate Week NYC  this year. See the schedule below, and follow the links for more information. Launch of the Global Nutrition Report Tuesday, September 22 5:00 pm &#8211; 8:00 pm, Hearst Building, New York Climate change is complicating global efforts [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Staff members from the International Research Institute for Climate and Society (IRI) are participating in a number of high-level events during Climate Week NYC  this year. See the schedule below, and follow the links for more information. Launch of the Global Nutrition Report Tuesday, September 22 5:00 pm &#8211; 8:00 pm, Hearst Building, New York Climate change is complicating global efforts [&hellip;]</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="http://blogs.ei.columbia.edu/2015/05/29/qa-getting-farmers-ready-for-a-changing-climate/" target="_blank">Q&A: Getting Farmers Ready for a Changing Climate</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">May 29, 2015</span>) in blogs.ei.columbia.edu
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="https://news.columbia.edu/news/columbia-researchers-win-challenge-develop-weather-insurance-smallholder-farmers" target="_blank">Colombia researchers win challenge to develop weather insurance for smallholder farmers</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">May 08, 2015</span>) in news.columbia.edu
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="http://blogs.ei.columbia.edu/2015/05/06/columbia-researchers-win-challenge-to-develop-weather-insurance-for-smallholder-farmers/" target="_blank">Colombia researchers win challenge to develop weather insurance for smallholder farmers</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">May 06, 2015</span>) in blogs.ei.columbia.edu
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="http://www.fao.org/in-action/glofard/news-detail/en/c/280036/" target="_blank">Making climate risk data actionable</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">April 01, 2015</span>) in fao.org
-                </span>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/videos-a-host-of-visitors/" target="_blank">VIDEOS: A Host of Visitors</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">March 27, 2015</span></span>
+            <li class="clearfix">
+                <img src="images/VIDEOS__A_Host_of_Visitors.png" alt="VIDEOS: A Host of Visitors" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/videos-a-host-of-visitors/" target="_blank">VIDEOS: A Host of Visitors</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">March 27, 2015</span></span>
+                    </div>
+                    <div class="entry-abstract">A walk through the International Research Institute for Climate and Society is often punctuated by the sounds of French, Spanish and other languages drifting through the halls. Our international staff contributes to this, but usually it&#8217;s a sign that we are hosting visitors for training and collaborations. Despite the increasing online connectedness of our world, [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">A walk through the International Research Institute for Climate and Society is often punctuated by the sounds of French, Spanish and other languages drifting through the halls. Our international staff contributes to this, but usually it&#8217;s a sign that we are hosting visitors for training and collaborations. Despite the increasing online connectedness of our world, [&hellip;]</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="http://blogs.ei.columbia.edu/2015/02/10/building-climate-resilience-in-agriculture/" target="_blank">Building climate resilience in agriculture</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">February 10, 2015</span>) in blogs.ei.columbia.edu
-                </span>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/new-study-proves-weather-based-index-insurance-can-work-for-rural-poor-on-large-scale/" target="_blank">New Study Proves Weather-Based Index Insurance Can Work For Rural Poor on Large Scale</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">January 26, 2015</span></span>
+            <li class="clearfix">
+                <img src="images/New_Study_Proves_Weather-Based_Index_Insurance_Can.jpg" alt="New Study Proves Weather-Based Index Insurance Can Work For Rural Poor on Large Scale" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/new-study-proves-weather-based-index-insurance-can-work-for-rural-poor-on-large-scale/" target="_blank">New Study Proves Weather-Based Index Insurance Can Work For Rural Poor on Large Scale</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">January 26, 2015</span></span>
+                    </div>
+                    <div class="entry-abstract">Findings spur Nigerian government to look into solutions to cover 15 million farmers by 2017 LONDON, UNITED KINGDOM (26 January 2015) — Nigerian government officials will convene in London this week to gather advice for scaling-up agricultural insurance policies for smallholder farmers, to bolster the up and coming agricultural powerhouse’s resilience to climate and market shocks. ￼The meeting [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Findings spur Nigerian government to look into solutions to cover 15 million farmers by 2017 LONDON, UNITED KINGDOM (26 January 2015) — Nigerian government officials will convene in London this week to gather advice for scaling-up agricultural insurance policies for smallholder farmers, to bolster the up and coming agricultural powerhouse’s resilience to climate and market shocks. ￼The meeting [&hellip;]</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Greatrex Helen, 
 Hansen James W, 
@@ -1218,25 +975,19 @@ Osgood, Daniel E</span>,
                 <div class="entry-meta">CGIAR Research Program on Climate Change, Agriculture and Food Security.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/designing-insurance-with-dominican-dairy-producers/" target="_blank">VIDEO: Designing Insurance with Dominican Dairy Producers</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">December 19, 2014</span></span>
+            <li class="clearfix">
+                <img src="images/VIDEO__Designing_Insurance_with_Dominican_Dairy_Pr.jpg" alt="VIDEO: Designing Insurance with Dominican Dairy Producers" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/designing-insurance-with-dominican-dairy-producers/" target="_blank">VIDEO: Designing Insurance with Dominican Dairy Producers</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">December 19, 2014</span></span>
+                    </div>
+                    <div class="entry-abstract">Over the last year, the financial instruments sector team at IRI has been working in the Dominican Republic to design an index insurance product for the country&#8217;s dairy producers. This work has been part of the Climate Resiliency and Index Insurance Program (CRII), funded by the USAID office in the Dominican Republic. In a new video, we show how researchers [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Over the last year, the financial instruments sector team at IRI has been working in the Dominican Republic to design an index insurance product for the country&#8217;s dairy producers. This work has been part of the Climate Resiliency and Index Insurance Program (CRII), funded by the USAID office in the Dominican Republic. In a new video, we show how researchers [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iri-agu-schedule-of-events-2014/" target="_blank">IRI@AGU: Schedule of Events</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">December 08, 2014</span></span>
-                </div>
-                <div class="entry-abstract">The IRI has a record thirteen scientists and staff presenting at the American Geophysical Union (AGU) Meeting this year. Below is the schedule of events for those presenting, organized by theme and with links to additional information about their research.  CLIMATE &amp; HEALTH Climate and Population Health Vulnerabilities to Vector-Borne Diseases: Increasing Resilience Under Climate [&hellip;]</div>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Bhattacharya, H., 
 D.E. Osgood</span>,
@@ -1249,61 +1000,67 @@ D.E. Osgood</span>,
                 <div class="entry-meta">Agricultural and Resource Economics Review, NAREA.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/insurance-and-adaptation-farmer-driven-opportunities/" target="_blank">Insurance and Adaptation: Farmer Driven Opportunities (Video)</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">November 12, 2014</span></span>
+            <li class="clearfix">
+                <img src="images/Insurance_and_Adaptation__Farmer_Driven_Opportunit.jpg" alt="Insurance and Adaptation: Farmer Driven Opportunities (Video)" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/insurance-and-adaptation-farmer-driven-opportunities/" target="_blank">Insurance and Adaptation: Farmer Driven Opportunities (Video)</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">November 12, 2014</span></span>
+                    </div>
+                    <div class="entry-abstract">The Financial Instruments Sector team at the International Research Institute for Climate and Society works with farmers, development organizations and agencies, insurance companies and other research institutes to design insurance products that are tailored to local and regional climate risks and economic systems. With the help of the Center for Research on Environmental Decisions, we&#8217;ve produced this video [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">The Financial Instruments Sector team at the International Research Institute for Climate and Society works with farmers, development organizations and agencies, insurance companies and other research institutes to design insurance products that are tailored to local and regional climate risks and economic systems. With the help of the Center for Research on Environmental Decisions, we&#8217;ve produced this video [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/first-climate-week-panel-to-focus-on-building-innovative-index-insurance-markets-in-developing-countries/" target="_blank">Climate Week Panel: Building Innovative Index Insurance Markets</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">September 18, 2014</span></span>
+            <li class="clearfix">
+                <img src="images/Climate_Week_Panel__Building_Innovative_Index_Insu.jpg" alt="Climate Week Panel: Building Innovative Index Insurance Markets" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/first-climate-week-panel-to-focus-on-building-innovative-index-insurance-markets-in-developing-countries/" target="_blank">Climate Week Panel: Building Innovative Index Insurance Markets</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">September 18, 2014</span></span>
+                    </div>
+                    <div class="entry-abstract">First Climate Week Panel To Focus On Building Innovative Index Insurance Markets in Developing Countries NEW YORK, September 18, 2014 — A panel of leaders and experts from the business, humanitarian and research communities will convene this week at the Climate Week NYC to discuss the growing relevance of index insurance as a tool to [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">First Climate Week Panel To Focus On Building Innovative Index Insurance Markets in Developing Countries NEW YORK, September 18, 2014 — A panel of leaders and experts from the business, humanitarian and research communities will convene this week at the Climate Week NYC to discuss the growing relevance of index insurance as a tool to [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/climate-week-2014-iri-events/" target="_blank">Join us for Climate Week NYC 2014</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">September 16, 2014</span></span>
+            <li class="clearfix">
+                <img src="images/Join_us_for_Climate_Week_NYC_2014.gif" alt="Join us for Climate Week NYC 2014" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/climate-week-2014-iri-events/" target="_blank">Join us for Climate Week NYC 2014</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">September 16, 2014</span></span>
+                    </div>
+                    <div class="entry-abstract">The International Research Institute for Climate and Society (IRI) is co-hosting several events during Climate Week NYC 2014. See the schedule of IRI events below, and follow the links for more information. If you are a member of the media and would like to attend any of the events, please write to media @ iri.columbia.edu. Sustaining Health Linking Environment, [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">The International Research Institute for Climate and Society (IRI) is co-hosting several events during Climate Week NYC 2014. See the schedule of IRI events below, and follow the links for more information. If you are a member of the media and would like to attend any of the events, please write to media @ iri.columbia.edu. Sustaining Health Linking Environment, [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/development-of-drought-relief-tools-in-the-northwestern-dominican-republic/" target="_blank">Drought Insurance for Ganaderos in the Dominican Republic</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Financial Instruments on <span class="date">August 25, 2014</span></span>
+            <li class="clearfix">
+                <img src="images/Drought_Insurance_for_Ganaderos_in_the_Dominican_R.jpg" alt="Drought Insurance for Ganaderos in the Dominican Republic" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/development-of-drought-relief-tools-in-the-northwestern-dominican-republic/" target="_blank">Drought Insurance for Ganaderos in the Dominican Republic</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Financial Instruments on <span class="date">August 25, 2014</span></span>
+                    </div>
+                    <div class="entry-abstract">By Sofía Martínez, Radost Stanimirova and Daniel Osgood Since January, the northwestern Dominican Republic has experienced one of the worst droughts in 15 years. Early work by the International Research Institute for Climate and Society and its partners on a project funded by the United States Agency for International Development has shown the potential for using [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">By Sofía Martínez, Radost Stanimirova and Daniel Osgood Since January, the northwestern Dominican Republic has experienced one of the worst droughts in 15 years. Early work by the International Research Institute for Climate and Society and its partners on a project funded by the United States Agency for International Development has shown the potential for using [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/climate-resilient-farming/" target="_blank">Factsheet: Climate-Resilient Farming</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Francesco Fiondella on <span class="date">August 13, 2014</span></span>
+            <li class="clearfix">
+                <img src="images/Seeing_More_with_Satellites__Improving_Insurance_f.jpg" alt="Seeing More with Satellites: Improving Insurance for African Farmers" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/seeing-more-with-satellites-improving-insurance-for-african-farmers/" target="_blank">Seeing More with Satellites: Improving Insurance for African Farmers</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Financial Instruments on <span class="date">August 12, 2014</span></span>
+                    </div>
+                    <div class="entry-abstract">By Bristol Mann and Radost Stanimirova A group of climate scientists, economists and remote sensing experts from the International Research Institute for Climate and Society and NASA’s Goddard Space Flight Center are collaborating to help solve a longstanding issue in the development of agriculture insurance programs in Africa: how to generate enough quality environmental data [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Farmers in Central America and the Caribbean are highly vulnerable to the impacts of a changing and variable climate. Current and projected changes in temperature, precipitation and the frequency of droughts, hurricanes and other extreme events threaten the region&#8217;s ability to meet goals for food security and economic growth. Farmers here typically lack access to timely, [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/seeing-more-with-satellites-improving-insurance-for-african-farmers/" target="_blank">Seeing More with Satellites: Improving Insurance for African Farmers</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Financial Instruments on <span class="date">August 12, 2014</span></span>
-                </div>
-                <div class="entry-abstract">By Bristol Mann and Radost Stanimirova A group of climate scientists, economists and remote sensing experts from the International Research Institute for Climate and Society and NASA’s Goddard Space Flight Center are collaborating to help solve a longstanding issue in the development of agriculture insurance programs in Africa: how to generate enough quality environmental data [&hellip;]</div>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Lisa Vaughan, 
 John Furlow, 
@@ -1320,16 +1077,19 @@ Roger Pulwarty,
                 <div class="entry-meta">Earth Perspectives, Springer.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/iri-and-u-of-arizona-team-up-for-climate/" target="_blank">IRI and U. of Arizona Team Up for Climate</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">May 22, 2014</span></span>
+            <li class="">
+                
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/iri-and-u-of-arizona-team-up-for-climate/" target="_blank">IRI and U. of Arizona Team Up for Climate</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">May 22, 2014</span></span>
+                    </div>
+                    <div class="entry-abstract">IRI and the University of Arizona address climate vulnerability in most at-risk areas of the world in new project The Caribbean, Asia’s Indo-Gangetic Plain and West Africa are three regions known to be extremely vulnerable to climate variability and change, particularly to droughts, extreme weather events and stresses on food production, water resources and coastal areas. A [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">IRI and the University of Arizona address climate vulnerability in most at-risk areas of the world in new project The Caribbean, Asia’s Indo-Gangetic Plain and West Africa are three regions known to be extremely vulnerable to climate variability and change, particularly to droughts, extreme weather events and stresses on food production, water resources and coastal areas. A [&hellip;]</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Michael Norton, 
 Daniel Osgood, 
@@ -1349,46 +1109,19 @@ Mengesha Gebremichaelh </span>,
                 <div class="entry-meta">Journal of Development Studies, Taylor & Francis.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/online-cropping-calendar-helps-government-manage-climate-risk-indonesia/" target="_blank">Online Crop Calendar Helps Indonesian Government Manage Climate Risk</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">March 31, 2014</span></span>
+            <li class="clearfix">
+                <img src="images/Online_Crop_Calendar_Helps_Indonesian_Government_M.jpg" alt="Online Crop Calendar Helps Indonesian Government Manage Climate Risk" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/online-cropping-calendar-helps-government-manage-climate-risk-indonesia/" target="_blank">Online Crop Calendar Helps Indonesian Government Manage Climate Risk</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Elisabeth Gawthrop on <span class="date">March 31, 2014</span></span>
+                    </div>
+                    <div class="entry-abstract">The International Research Institute for Climate and Society and the Center on Globalization and Sustainable Development at Columbia University are collaborating with the Centre for Climate Risk and Opportunity Management in Southeast Asia Pacific at Institut Pertanian Bogor (IPB &#8211; Bogor Agriculture University) in Indonesia to help farmers cope with droughts, fires and other climate impacts. The project, called “CU-IPB [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">The International Research Institute for Climate and Society and the Center on Globalization and Sustainable Development at Columbia University are collaborating with the Centre for Climate Risk and Opportunity Management in Southeast Asia Pacific at Institut Pertanian Bogor (IPB &#8211; Bogor Agriculture University) in Indonesia to help farmers cope with droughts, fires and other climate impacts. The project, called “CU-IPB [&hellip;]</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="http://www.lainformacion.com.do/noticias/economia/17220/ganaderos-participaran-de-un-simulacro-de-funcionamiento-del-primer-seguro-de-indice-de-sequia" target="_blank">Ganaderos participarán de un simulacro de funcionamiento del primer seguro de índice de sequía</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">January 27, 2014</span>) in lainformacion.com.do
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="http://hoy.com.do/ganaderos-participaran-en-un-simulacro-sobre-indice-de-sequia/" target="_blank">Ganaderos participarán en un simulacro sobre índice de sequía</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">January 27, 2014</span>) in hoy.com.do
-                </span>
-            </li>
-
-            <li>
-                <span class="entry-title">
-                    <a href="http://www.ccafs.cgiar.org/blog/call-action-building-index-insurance-community-bangladesh#.Umqfc5GrH1t" target="_blank">A call to action: building an index insurance community in Bangladesh</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">October 09, 2013</span>) in ccafs.cgiar.org
-                </span>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Radost Stanimirova, 
 Helen Greatrex, 
@@ -1412,35 +1145,31 @@ Daniel E. Osgood</span>,
                 
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/insuring-37000-rwandan-farmers-against-drought/" target="_blank">Insuring 37,000 Rwandan Farmers Against Drought</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Francesco Fiondella on <span class="date">August 22, 2013</span></span>
+            <li class="clearfix">
+                <img src="images/Insuring_37_000_Rwandan_Farmers_Against_Drought.jpg" alt="Insuring 37,000 Rwandan Farmers Against Drought" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/insuring-37000-rwandan-farmers-against-drought/" target="_blank">Insuring 37,000 Rwandan Farmers Against Drought</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Francesco Fiondella on <span class="date">August 22, 2013</span></span>
+                    </div>
+                    <div class="entry-abstract">Index insurance can lower the cost of insurance, allowing smallholder farmers to buy insurance that can help them withstand the impacts of bad years and risk making productive investments in good years. A key component of index insurance is historical data – often temperature or rainfall data – to use as a basis for creating an index that determines when insurance payouts [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Index insurance can lower the cost of insurance, allowing smallholder farmers to buy insurance that can help them withstand the impacts of bad years and risk making productive investments in good years. A key component of index insurance is historical data – often temperature or rainfall data – to use as a basis for creating an index that determines when insurance payouts [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/an-index-insurance-primer-2/" target="_blank">An Index Insurance Primer</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Francesco Fiondella on <span class="date">August 16, 2013</span></span>
+            <li class="clearfix">
+                <img src="images/An_Index_Insurance_Primer.jpg" alt="An Index Insurance Primer" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/an-index-insurance-primer-2/" target="_blank">An Index Insurance Primer</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Francesco Fiondella on <span class="date">August 16, 2013</span></span>
+                    </div>
+                    <div class="entry-abstract">IRI has put together a list of Frequently Asked Questions for the US Agency for International Development about index insurance and how it is being used in development and adaptation projects around the world. Download the FAQ or click on the image. If you&#8217;re looking for even more resources on index insurance, head over to our Financial [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">IRI has put together a list of Frequently Asked Questions for the US Agency for International Development about index insurance and how it is being used in development and adaptation projects around the world. Download the FAQ or click on the image. If you&#8217;re looking for even more resources on index insurance, head over to our Financial [&hellip;]</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="http://www.research-europe.com/index.php/2013/07/dr-lisa-goddard-director-international-research-institute-for-climate-and-society-2/" target="_blank">Interview with Dr Lisa Goddard, Director, International Research Institute for Climate and Society</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">July 26, 2013</span>) in research-europe.com
-                </span>
-            </li>
-
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Osgood, Daniel E</span>,
                     <span class="date">June 2013</span>.
@@ -1452,7 +1181,7 @@ Daniel E. Osgood</span>,
                 <div class="entry-meta">Proceeding of Workshop: The challenges of index-based insurance for food security in developing countries, Publications Office of the European Union.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Gommes, René, 
 Kayitakire, François</span>,
@@ -1465,7 +1194,7 @@ Kayitakire, François</span>,
                 <div class="entry-meta">Publications Office of the European Union.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Lyon, Bradfield</span>,
                     <span class="date">June 2013</span>.
@@ -1477,7 +1206,7 @@ Kayitakire, François</span>,
                 <div class="entry-meta">Proceeding of Workshop: The challenges of index-based insurance for food security in developing countries, Publications Office of the European Union.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Greatrex, Helen, 
 Grimes, David I. F.</span>,
@@ -1490,7 +1219,7 @@ Grimes, David I. F.</span>,
                 <div class="entry-meta">Proceeding of Workshop: The challenges of index-based insurance for food security in developing countries, Publications Office of the European Union.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Andrew R. Bell, 
 Daniel Osgood, 
@@ -1509,35 +1238,31 @@ Edward R. Cook</span>,
                 <div class="entry-meta">Global Environmental Change, Elsevier.</div>
             </li>
 
-            <li>
-                <span class="entry-title">
-                    <a href="http://www.diariolibre.com/noticias/2013/02/12/i371097_usaid-impulsara-seguro-para-agricultores.html?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_1" target="_blank">USAID impulsará seguro para agricultores</a>
-                    <span class="type-label">[Media Mention]</span>
-                </span>
-                <span class="entry-meta">
-                    (<span class="date">February 12, 2013</span>) in diariolibre.com
-                </span>
-            </li>
-
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/poor-ethiopian-farmers-receive-unprecedented-insurance-payout/" target="_blank">Poor Ethiopian Farmers Receive &#8220;Unprecedented&#8221; Insurance Payout</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Brian Kahn on <span class="date">December 12, 2012</span></span>
+            <li class="clearfix">
+                <img src="images/Poor_Ethiopian_Farmers_Receive__Unprecedented__Ins.png" alt="Poor Ethiopian Farmers Receive &#8220;Unprecedented&#8221; Insurance Payout" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/poor-ethiopian-farmers-receive-unprecedented-insurance-payout/" target="_blank">Poor Ethiopian Farmers Receive &#8220;Unprecedented&#8221; Insurance Payout</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Brian Kahn on <span class="date">December 12, 2012</span></span>
+                    </div>
+                    <div class="entry-abstract">Oxfam America and The Rockefeller Foundation announced a weather index insurance payout of unprecedented scale directly to poor farmers. Thanks to a groundbreaking new program that relies on advanced satellite technology, more than 12,200 farmers in 45 villages in Northern Ethiopia will benefit from drought protection. As a result of this year&#8217;s drought conditions each [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Oxfam America and The Rockefeller Foundation announced a weather index insurance payout of unprecedented scale directly to poor farmers. Thanks to a groundbreaking new program that relies on advanced satellite technology, more than 12,200 farmers in 45 villages in Northern Ethiopia will benefit from drought protection. As a result of this year&#8217;s drought conditions each [&hellip;]</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/breaking-the-poverty-trap-in-ethiopia-subsistence-satellites-and-some-other-important-stuff-2/" target="_blank">Breaking the Poverty Trap in Ethiopia: Subsistence, Satellites, and Some Other Important Stuff</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Brian Kahn on <span class="date">August 29, 2012</span></span>
+            <li class="">
+                
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/breaking-the-poverty-trap-in-ethiopia-subsistence-satellites-and-some-other-important-stuff-2/" target="_blank">Breaking the Poverty Trap in Ethiopia: Subsistence, Satellites, and Some Other Important Stuff</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Brian Kahn on <span class="date">August 29, 2012</span></span>
+                    </div>
+                    <div class="entry-abstract">Subsistence Two acres of cracked earth. In northern Ethiopia, it can be a trap that keeps farmers tethered to it for generations. Or it can be a springboard to a better life for this and future generations. What impedes it from showing its springier qualities? You could argue the biggest pressure on the land comes [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Subsistence Two acres of cracked earth. In northern Ethiopia, it can be a trap that keeps farmers tethered to it for generations. Or it can be a springboard to a better life for this and future generations. What impedes it from showing its springier qualities? You could argue the biggest pressure on the land comes [&hellip;]</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Miguel A. Fonseca, 
 Alexander Pfaff, 
@@ -1551,7 +1276,7 @@ Daniel Osgood</span>,
                 <div class="entry-meta">American Journal of Agricultural Economics , Oxford University Press.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">David J. Hardisty, 
 Ben Orlove, 
@@ -1568,7 +1293,7 @@ Daniel E. Osgood</span>,
                 <div class="entry-meta">Global Environmental Change, Elsevier.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Miguel A. Carriquiry, 
 Daniel E. Osgood</span>,
@@ -1581,16 +1306,19 @@ Daniel E. Osgood</span>,
                 <div class="entry-meta">Journal of Risk and Insurance, Wiley.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/a-model-for-improving-climate-services-in-africa/" target="_blank">A model for improving climate services in Africa</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Francesco Fiondella on <span class="date">February 01, 2012</span></span>
+            <li class="">
+                
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/a-model-for-improving-climate-services-in-africa/" target="_blank">A model for improving climate services in Africa</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Francesco Fiondella on <span class="date">February 01, 2012</span></span>
+                    </div>
+                    <div class="entry-abstract">In developed countries, we are accustomed to having access to long and detailed records on weather and climate conditions, demographics, disease incidence and many other types of data. Decision makers use this information for a variety of societal benefits: they spot trends, fine-tune public health systems and optimize crop yields, for example. Researchers use it [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">In developed countries, we are accustomed to having access to long and detailed records on weather and climate conditions, demographics, disease incidence and many other types of data. Decision makers use this information for a variety of societal benefits: they spot trends, fine-tune public health systems and optimize crop yields, for example. Researchers use it [&hellip;]</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Daniel Osgood, 
 Kenneth E. Shirley</span>,
@@ -1603,16 +1331,19 @@ Kenneth E. Shirley</span>,
                 <div class="entry-meta">Springer.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/insuring-against-drought/" target="_blank">Insuring Against Drought</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Francesco Fiondella on <span class="date">September 02, 2011</span></span>
+            <li class="">
+                
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/insuring-against-drought/" target="_blank">Insuring Against Drought</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Francesco Fiondella on <span class="date">September 02, 2011</span></span>
+                    </div>
+                    <div class="entry-abstract">In our latest video interview, research economist Dan Osgood discusses index insurance and how it is helping some poor rural communities reduce hardships caused by drought in East Africa: These products are becoming available to people for the first time at larges scales just this year. Given the difficulties of these [two] years, the farmers [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">In our latest video interview, research economist Dan Osgood discusses index insurance and how it is helping some poor rural communities reduce hardships caused by drought in East Africa: These products are becoming available to people for the first time at larges scales just this year. Given the difficulties of these [two] years, the farmers [&hellip;]</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Rosalind H. Bark, 
 Daniel E. Osgood, 
@@ -1627,7 +1358,7 @@ Eve B. Halper</span>,
                 <div class="entry-meta">Journal of Agricultural and Resource Economics.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Osgood, D., 
 Sharoff, J., 
@@ -1644,7 +1375,7 @@ Norton, M.,
                 <div class="entry-meta">IRI Technical Report, International Research Institute for Climate and Society.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Osgood, D., 
 Hellmuth, M. (eds)</span>,
@@ -1657,7 +1388,7 @@ Hellmuth, M. (eds)</span>,
                 <div class="entry-meta">IRI Technical Report, International Research Institute for Climate and Society.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Chen, J., 
 Dinku, T., 
@@ -1685,7 +1416,7 @@ The, T.-L. </span>,
                 <div class="entry-meta">IRI Technical Report, International Research Institute for Climate and Society.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Chen, J., 
 Dinku, T., 
@@ -1713,7 +1444,7 @@ Teh, T.-L. </span>,
                 <div class="entry-meta">IRI Technical Report, International Research Institute for Climate and Society.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Hellmuth, M., 
 Osgood, D., 
@@ -1729,7 +1460,7 @@ Bhojwani, H.</span>,
                 <div class="entry-meta">IRI Climate and Society Series, International Research Institute for Climate and Society.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Sheriff, G., 
 D. Osgood.</span>,
@@ -1742,7 +1473,7 @@ D. Osgood.</span>,
                 <div class="entry-meta">American Journal of Agricultural Economic, Agricultural and Applied Economics Association.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Baethgen, W.E.; Hansen, J. W.; Ines, A.V.M.; Jones, J. W.; Meinke, H; Steduto, P.</span>,
                     <span class="date">January 2010</span>.
@@ -1754,7 +1485,7 @@ D. Osgood.</span>,
                 <div class="entry-meta">IRI Climate and Society Series.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Valerie A. Mueller, 
 Daniel E. Osgood </span>,
@@ -1767,16 +1498,19 @@ Daniel E. Osgood </span>,
                 <div class="entry-meta">The Journal of Development Studies, Taylor & Francis.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/leaders-in-index-insurance-expand-their-commitments-in-ethiopia/" target="_blank">Leaders in index insurance expand their commitments in Ethiopia</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by Francesco Fiondella on <span class="date">September 28, 2009</span></span>
+            <li class="clearfix">
+                <img src="images/Leaders_in_index_insurance_expand_their_commitment.jpg" alt="Leaders in index insurance expand their commitments in Ethiopia" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/leaders-in-index-insurance-expand-their-commitments-in-ethiopia/" target="_blank">Leaders in index insurance expand their commitments in Ethiopia</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by Francesco Fiondella on <span class="date">September 28, 2009</span></span>
+                    </div>
+                    <div class="entry-abstract">Swiss Re, Oxfam America, The Rockefeller Foundation and Columbia University&#8217;s International Research Institute for Climate and Society announced a joint Commitment to Action at the Clinton Global Initiative 2009 meeting in New York, held from September 22 to 25. The collaboration is aimed at helping communities most vulnerable to climate variability and change. It will [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Swiss Re, Oxfam America, The Rockefeller Foundation and Columbia University&#8217;s International Research Institute for Climate and Society announced a joint Commitment to Action at the Clinton Global Initiative 2009 meeting in New York, held from September 22 to 25. The collaboration is aimed at helping communities most vulnerable to climate variability and change. It will [&hellip;]</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Valerie Mueller, 
 Daniel Osgood</span>,
@@ -1789,7 +1523,7 @@ Daniel Osgood</span>,
                 <div class="entry-meta">Agricultural Economics, Wiley.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Dinku, T., 
 Giannini, A., 
@@ -1818,16 +1552,19 @@ Vicarelli, M.</span>,
                 <div class="entry-meta">IRI Technical Report, International Research Institute for Climate and Society.</div>
             </li>
 
-            <li>
-                <div class="entry-title">
-                    <a href="https://iri.columbia.edu/news/index-insurance-for-development-and-disaster-management/" target="_blank">Index insurance for development and disaster management</a>
-                    <span class="type-label">[News/Feature]</span>
-                    <span class="entry-meta">by IRI on <span class="date">June 24, 2009</span></span>
+            <li class="clearfix">
+                <img src="images/Index_insurance_for_development_and_disaster_manag.jpg" alt="Index insurance for development and disaster management" class="entry-image">
+                <div class="news-content-wrapper">
+                    <div class="entry-title">
+                        <a href="https://iri.columbia.edu/news/index-insurance-for-development-and-disaster-management/" target="_blank">Index insurance for development and disaster management</a>
+                        <span class="type-label">[News/Feature]</span>
+                        <span class="entry-meta">by IRI on <span class="date">June 24, 2009</span></span>
+                    </div>
+                    <div class="entry-abstract">Para Espanol: Seguro &#8216;parametrico&#8217; y reduccion de la pobreza Pour Francais: Une assurance particuliere pour la gestion des risques climatiques Climate has always presented a challenge to farmers, herders, fishermen and others whose livelihoods are closely linked to their environment, particularly those in poor areas of the world. A type of insurance called index insurance [&hellip;]</div>
                 </div>
-                <div class="entry-abstract">Para Espanol: Seguro &#8216;parametrico&#8217; y reduccion de la pobreza Pour Francais: Une assurance particuliere pour la gestion des risques climatiques Climate has always presented a challenge to farmers, herders, fishermen and others whose livelihoods are closely linked to their environment, particularly those in poor areas of the world. A type of insurance called index insurance [&hellip;]</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Hellmuth, M., 
 Osgood, D., 
@@ -1843,7 +1580,7 @@ Bhojwani, H.</span>,
                 <div class="entry-meta">IRI Climate and Society Series, International Research Institute for Climate and Society.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Bark-Hodgkins, R.H., 
 Osgood, D. E., 
@@ -1859,7 +1596,7 @@ Stromberg, J.</span>,
                 <div class="entry-meta">Ecological Economics, Elsevier.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Giannini, A., 
 Hansen, J., 
@@ -1881,7 +1618,7 @@ Vicarelli, M.</span>,
                 <div class="entry-meta">IRI Technical Report, International Research Institute for Climate and Society.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Brown, C., 
 Carriquiry, M.</span>,
@@ -1894,7 +1631,7 @@ Carriquiry, M.</span>,
                 <div class="entry-meta">Water Resources Research, American Geophysical Union.</div>
             </li>
 
-            <li>
+            <li class="">
                 <div class="entry-meta">
                     <span class="author-list">Osgood, Daniel E., 
 McLaurin, Megan, 

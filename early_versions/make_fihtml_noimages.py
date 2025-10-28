@@ -17,8 +17,6 @@ CACHE_DIR = "cached"
 # 1. media_data.csv
 # 2. news_data.csv
 # 3. publications_data.csv
-# 4. image_data.csv
-# and a directory named 'images'
 
 def safe_filename(title: str, url: str) -> str:
     """Creates a filesystem-safe filename, using a clean version of the title and a URL hash."""
@@ -122,29 +120,7 @@ def try_parse_news_date(date_str: str) -> datetime:
     return datetime(1900, 1, 1)
 
 
-def load_image_map(filename: str) -> Dict[str, str]:
-    """Reads image_data.csv and returns a map of article_url to image_name."""
-    image_map = {}
-    try:
-        with open(filename, mode='r', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                # The key is article_url, value is image_name
-                # We strip any URL query parameters or anchors for better matching
-                url_key = row.get('article_url', '').split('?')[0].split('#')[0].strip()
-                image_map[url_key] = row.get('image_name', '').strip()
-                
-    except FileNotFoundError:
-        print(f"Warning: Image data file not found at '{filename}'. No images will be linked.")
-    except KeyError:
-        print(f"Warning: Image data file '{filename}' is missing 'article_url' or 'image_name' columns.")
-    except Exception as e:
-        print(f"An unexpected error occurred while processing '{filename}': {e}")
-        
-    return image_map
-
-
-def parse_csv_data(filename: str, data_type: str, should_cache: bool, image_map: Dict[str, str] = None) -> List[Dict[str, Any]]:
+def parse_csv_data(filename: str, data_type: str, should_cache: bool) -> List[Dict[str, Any]]:
     """Reads CSV data from a file, parses it into structured entries, and handles caching if enabled."""
     entries = []
     
@@ -196,27 +172,18 @@ def parse_csv_data(filename: str, data_type: str, should_cache: bool, image_map:
                         date_str = date_obj.strftime('%B %d, %Y')
                         
                         title = row['title']
-                        original_url = row['url'].split('?')[0].split('#')[0].strip() # Use cleaned URL for image map lookup
-                        
-                        # --- IMAGE LOGIC ---
-                        image_name = ''
-                        if image_map:
-                            image_name = image_map.get(original_url, '')
-                        # Path for the HTML <img> tag
-                        image_path = f"images/{image_name}" if image_name else ''
-                        # --- END IMAGE LOOKUP ---
+                        link = row['url']
 
                         # Cache the external link (passing the flag)
-                        local_link = cache_link(row['url'], title, should_cache) # Use the full original URL for caching
+                        local_link = cache_link(link, title, should_cache)
 
                         entry.update({
                             'date_obj': date_obj,
                             'date_str': date_str,
                             'title': title,
-                            'link': local_link, # Potentially cached link
+                            'link': local_link,
                             'author': row['author'],
                             'excerpt': row['excerpt'],
-                            'image_path': image_path, # The path to the image
                         })
                         entries.append(entry)
                     except KeyError as e:
@@ -287,7 +254,8 @@ def parse_csv_data(filename: str, data_type: str, should_cache: bool, image_map:
 def generate_html(sorted_entries: List[Dict[str, Any]]) -> str:
     """Generates the HTML content with custom styling and formatting for each entry type."""
 
-    # MODIFICATION: Added .clearfix class to ensure subsequent list items start below the float.
+    # Base style updated for blue header, white title, and white background
+    # MODIFICATION: Changed .entry-abstract font-size from 13px to 14px.
     style = """
         /* Set full browser window background to white */
         body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; background-color: #fff; color: #333; } 
@@ -314,38 +282,15 @@ def generate_html(sorted_entries: List[Dict[str, Any]]) -> str:
         
         /* Ensure abstract text displays fully without truncation or overflow limits */
         .entry-abstract { 
-            font-size: 14px; 
+            font-size: 14px; /* ADJUSTED: Increased from 13px to 14px for better readability */
             color: #444; 
             margin-top: 5px; 
-            padding: 8px 0 0 0; 
-            white-space: normal;
-            overflow: visible;
-            word-wrap: break-word; 
-        }
-
-        /* Styling for the image in news/feature entries */
-        .entry-image {
-            float: left; 
-            margin-right: 15px; 
-            margin-bottom: 15px; 
-            max-width: 150px; 
-            height: auto;
-            border-radius: 4px;
-        }
-
-        /* Wrapper to contain the floated image and the text content */
-        .news-content-wrapper {
-            /* This property contains the float within this element's boundaries, 
-               but the float can still affect elements outside of this wrapper 
-               if they are not cleared or in a new block formatting context. */
-            display: flow-root; 
-        }
-
-        /* NEW: Class to clear the float after the news entry is complete. */
-        .clearfix::after {
-            content: "";
-            display: table;
-            clear: both;
+            /* background-color: #f9f9f9;  <-- REMOVED in previous step */
+            padding: 8px; 
+            /* border-left: 3px solid #ccc; <-- REMOVED in previous step */
+            white-space: normal; /* Ensures text wraps naturally */
+            overflow: visible;  /* Ensures content is never hidden */
+            word-wrap: break-word; /* Allows long words to break to prevent horizontal scroll */
         }
         
         /* Specialized styles */
@@ -384,12 +329,6 @@ def generate_html(sorted_entries: List[Dict[str, Any]]) -> str:
             'media': 'Media Mention',
         }.get(data_type, 'Item')
 
-        # Determine if a clearfix is needed (only for news/feature with an image)
-        li_class = ""
-        if data_type == 'news' and entry.get('image_path'):
-             # Apply clearfix to the list item to ensure the next <li> starts below the float
-             li_class = "clearfix"
-
         # --- Publications Format ---
         if data_type == 'publications':
             # Format: Authors, Year/Month, Title (Linked), Journal, Publisher.
@@ -402,7 +341,7 @@ def generate_html(sorted_entries: List[Dict[str, Any]]) -> str:
             meta_str = ', '.join(meta)
 
             html_content += f"""
-            <li class="{li_class}">
+            <li>
                 <div class="entry-meta">
                     <span class="author-list">{entry['authors']}</span>,
                     <span class="date">{entry['date_str']}</span>.
@@ -416,21 +355,15 @@ def generate_html(sorted_entries: List[Dict[str, Any]]) -> str:
 """
         # --- News Format ---
         elif data_type == 'news':
-            # Generate image HTML if a path exists
-            image_html = f'<img src="{entry["image_path"]}" alt="{entry["title"]}" class="entry-image">' if entry.get('image_path') else ''
-            
-            # Format: Image (Floated Left), Title (Linked), Date, Author, Excerpt (text/summary).
+            # Format: Title (Linked), Date, Author, Excerpt (text/summary).
             html_content += f"""
-            <li class="{li_class}">
-                {image_html}
-                <div class="news-content-wrapper">
-                    <div class="entry-title">
-                        <a href="{entry['link']}" target="_blank">{entry['title']}</a>
-                        <span class="type-label">[{type_label}]</span>
-                        <span class="entry-meta">by {entry['author']} on <span class="date">{entry['date_str']}</span></span>
-                    </div>
-                    <div class="entry-abstract">{entry['excerpt']}</div>
+            <li>
+                <div class="entry-title">
+                    <a href="{entry['link']}" target="_blank">{entry['title']}</a>
+                    <span class="type-label">[{type_label}]</span>
+                    <span class="entry-meta">by {entry['author']} on <span class="date">{entry['date_str']}</span></span>
                 </div>
+                <div class="entry-abstract">{entry['excerpt']}</div>
             </li>
 """
 
@@ -438,7 +371,7 @@ def generate_html(sorted_entries: List[Dict[str, Any]]) -> str:
         elif data_type == 'media':
             # Format: Title (Linked), Date, Source.
             html_content += f"""
-            <li class="{li_class}">
+            <li>
                 <span class="entry-title">
                     <a href="{entry['link']}" target="_blank">{entry['title']}</a>
                     <span class="type-label">[{type_label}]</span>
@@ -476,25 +409,21 @@ def main():
     should_cache = args.cache
     print(f"Caching is {'ENABLED' if should_cache else 'DISABLED'}. Use the '--cache' flag to enable downloading.")
 
-    # 1. Load image mapping data
-    image_map = load_image_map('image_data.csv')
-    
-    # 2. Read and Parse Data from local CSV files, passing the caching flag and the image map
+    # 1. Read and Parse Data from local CSV files, passing the caching flag
     media_entries = parse_csv_data('media_data.csv', 'media', should_cache)
-    # Pass the image map ONLY to the news parser
-    news_entries = parse_csv_data('news_data.csv', 'news', should_cache, image_map)
+    news_entries = parse_csv_data('news_data.csv', 'news', should_cache)
     publication_entries = parse_csv_data('publications_data.csv', 'publications', should_cache)
 
-    # 3. Combine all entries
+    # 2. Combine all entries
     all_entries = media_entries + news_entries + publication_entries
 
-    # 4. Sort all entries by date (most recent first)
+    # 3. Sort all entries by date (most recent first)
     all_entries.sort(key=lambda x: x['date_obj'], reverse=True)
 
-    # 5. Generate HTML
+    # 4. Generate HTML
     html_output = generate_html(all_entries)
 
-    # 6. Write to file
+    # 5. Write to file
     output_filename = 'financial_instruments.html'
     with open(output_filename, 'w', encoding='utf-8') as f:
         f.write(html_output)
