@@ -17,7 +17,7 @@ CACHE_DIR = "cached"
 # 1. media_data.csv
 # 2. news_data.csv
 # 3. publications_data.csv
-# 4. image_data.csv
+# 4. image_data.csv (NO LONGER USED, but function is kept for script integrity)
 # and a directory named 'images'
 
 def safe_filename(title: str, url: str) -> str:
@@ -123,7 +123,8 @@ def try_parse_news_date(date_str: str) -> datetime:
 
 
 def load_image_map(filename: str) -> Dict[str, str]:
-    """Reads image_data.csv and returns a map of article_url to image_name."""
+    """Reads image_data.csv and returns a map of article_url to image_name. 
+    NOTE: This function is now OBSOLETE but kept for script integrity."""
     image_map = {}
     try:
         with open(filename, mode='r', encoding='utf-8') as f:
@@ -135,11 +136,13 @@ def load_image_map(filename: str) -> Dict[str, str]:
                 image_map[url_key] = row.get('image_name', '').strip()
                 
     except FileNotFoundError:
-        print(f"Warning: Image data file not found at '{filename}'. No images will be linked.")
+        print(f"Warning: Image data file not found at '{filename}'. News image lookups are now using the 'imagename' column in news_data.csv.")
     except KeyError:
-        print(f"Warning: Image data file '{filename}' is missing 'article_url' or 'image_name' columns.")
+        # This print statement is intentionally suppressed as the map is no longer used
+        pass 
     except Exception as e:
-        print(f"An unexpected error occurred while processing '{filename}': {e}")
+        # This print statement is intentionally suppressed as the map is no longer used
+        pass
         
     return image_map
 
@@ -159,8 +162,16 @@ def parse_csv_data(filename: str, data_type: str, should_cache: bool, image_map:
                 if data_type == 'media':
                     # Media Data: title, external_link, date, source
                     try:
-                        date_obj = datetime.strptime(row['date'], '%Y-%m-%d')
+                        # --- MODIFICATION: Use robust date parser for media ---
+                        raw_date = row.get('date', '').strip()
+                        date_obj = try_parse_news_date(raw_date) # Use robust date parser
+                        
+                        if date_obj == datetime(1900, 1, 1) and raw_date:
+                             print(f"Warning: Could not parse media date '{raw_date}'. Using fallback date 1900-01-01.")
+
                         title = row['title']
+                        # --- END MODIFICATION ---
+
                         link = row['external_link']
                         
                         # Cache the external link (passing the flag)
@@ -180,7 +191,7 @@ def parse_csv_data(filename: str, data_type: str, should_cache: bool, image_map:
                         print(f"Skipping media entry in {filename}. Missing required column: {e}")
 
                 elif data_type == 'news':
-                    # News Data: title, url, author, date, excerpt
+                    # News Data: title, url, author, date, excerpt, imagename
                     try:
                         raw_date = row.get('date', '').strip()
                         
@@ -196,16 +207,15 @@ def parse_csv_data(filename: str, data_type: str, should_cache: bool, image_map:
                         date_str = date_obj.strftime('%B %d, %Y')
                         
                         title = row['title']
-                        original_url = row['url'].split('?')[0].split('#')[0].strip() # Use cleaned URL for image map lookup
                         
-                        # --- IMAGE LOGIC ---
-                        image_name = ''
-                        if image_map:
-                            image_name = image_map.get(original_url, '')
+                        # --- MODIFICATION: Use the 'imagename' column from the row ---
+                        # The original logic used image_map lookup, we replace it with a direct column read.
+                        image_name = row.get('imagename', '').strip()
+                        # --- END MODIFICATION ---
+                        
                         # Path for the HTML <img> tag
                         image_path = f"images/{image_name}" if image_name else ''
-                        # --- END IMAGE LOOKUP ---
-
+                        
                         # Cache the external link (passing the flag)
                         local_link = cache_link(row['url'], title, should_cache) # Use the full original URL for caching
 
@@ -477,11 +487,14 @@ def main():
     print(f"Caching is {'ENABLED' if should_cache else 'DISABLED'}. Use the '--cache' flag to enable downloading.")
 
     # 1. Load image mapping data
+    # NOTE: This call is kept for compatibility with the original script structure, 
+    # but the image map is no longer used for news entries.
     image_map = load_image_map('image_data.csv')
     
     # 2. Read and Parse Data from local CSV files, passing the caching flag and the image map
+    # Media entries now use robust date parsing
     media_entries = parse_csv_data('media_data.csv', 'media', should_cache)
-    # Pass the image map ONLY to the news parser
+    # News entries use robust date parsing and the 'imagename' column
     news_entries = parse_csv_data('news_data.csv', 'news', should_cache, image_map)
     publication_entries = parse_csv_data('publications_data.csv', 'publications', should_cache)
 
@@ -506,3 +519,4 @@ if __name__ == '__main__':
     # When running the script, the links will be cached in the 'cached' directory if --cache is used.
     # If the download fails, the original external URL will be used in the HTML.
     main()
+
