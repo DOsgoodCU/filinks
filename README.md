@@ -29,14 +29,19 @@ Now make_fihtml.py code is updated to use imagename column in the news_data.csv 
 I need to:
   -add links to capstones
   -add wiiet links (make sure cached, probalby point to that, include spreadsheet)
+    It is already a repo: git@bitbucket.org:jturmelle/wiiedu.git
+    Ive asked Jeff to move it to https://github.com/ccsfist 
+    We should change it to be directly hosted on github.io
   -check for broken links, decide what to do
   -make sure everything is cached, if only backups
   -make a version that can create short lists of stuff for donors/partners
-  -figure out where to host
-  -Use AI to combine columbia commons with publications, using columbia commons when duplicates
+  -figure out where to host for real version
+  -Columbia commons cant be scraped, emailed ac@columbia.edu asking about their many APIs...
+    Should add to publications csv, find duplicates, ask which/both or if already commons just skip
   -Use ai to figure out which are not public domain, strategically use iri server with password. 
   -formatting?
   -Plan for updating publications (not duplicate with commons)
+  -Make category that hovers near the top always
 
 
   Broken links Ive found:
