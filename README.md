@@ -11,29 +11,32 @@ It has a few pieces.
     It creates a cache directory and when activated makes the html point to the cache
     It needs to be thought through (and perhaps not sit in the repo, but be more of a backup)
 
+Only needed to migrate out of old IRI page:
   scrape_images.py
     scrapes https://iri.columbia.edu/topics/financial-instruments/
     generates image_data.csv and a directory of cached images called images
+    Should only need to be run the first time Im pulling from the IRI website
+ images2news_data.py
+   This takes the images scraped above, and adds them to a imagename column in the news_data.csv file.
+ 
+Now make_fihtml.py code is updated to use imagename column in the news_data.csv to look for images
+   The way to add an image will be to put it in the images folder, and point to it in the news_data.csv file
 
   find_duplicates.py
     this searches the 3 csv files for potential duplicates and reports them to stdout
     Some of these are not duplicates, but simply have the same title words
   
 I need to:
-  -Commit and publish soon
-  -clean up duplicates and make sure the right source is used (least IRI as possible)
-  -add images to the financial_instruments.html
+  -add links to capstones
   -check for broken links
-  -make sure everything is cached
+  -make sure everything is cached, if only backups
   -make a version that can create short lists of stuff for donors/partners
   -figure out where to host
   -Use AI to combine columbia commons with publications, using columbia commons when duplicates
   -Use ai to figure out which are not public domain, strategically use iri server with password. 
-  -Ask Lauren about prompts for formatting
+  -formatting?
   -Plan for updating publications (not duplicate with commons)
-  -Add desdr links
-  -add repo links like okinsure, insurepeople, evacuate, 
-  -add links to capstones
+
 
   Broken links Ive found:
   Both of these:
