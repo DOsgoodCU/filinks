@@ -28,7 +28,8 @@ Now make_fihtml.py code is updated to use imagename column in the news_data.csv 
   
 I need to:
   -add links to capstones
-  -check for broken links
+  -add wiiet links (make sure cached, probalby point to that, include spreadsheet)
+  -check for broken links, decide what to do
   -make sure everything is cached, if only backups
   -make a version that can create short lists of stuff for donors/partners
   -figure out where to host
