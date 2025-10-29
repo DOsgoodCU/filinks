@@ -1,6 +1,6 @@
 # This is a repo for FI links serving # filinks
 
-## It has a few pieces.
+### It has a few pieces.
   - make_fihtml.py 
     uses media_data.csv, news_data.csv, publications_data.csv 
     to generate: financial_instruments.html
@@ -11,7 +11,7 @@
     It creates a cache directory and when activated makes the html point to the cache
     It needs to be thought through (and perhaps not sit in the repo, but be more of a backup)
 
-## Only needed to migrate out of old IRI page:
+### Only needed to migrate out of old IRI page:
   - scrape_images.py
     scrapes https://iri.columbia.edu/topics/financial-instruments/
     generates image_data.csv and a directory of cached images called images
@@ -19,14 +19,14 @@
  - images2news_data.py
    This takes the images scraped above, and adds them to a imagename column in the news_data.csv file.
  
-## Now make_fihtml.py code is updated to use imagename column in the news_data.csv to look for images
+### Now make_fihtml.py code is updated to use imagename column in the news_data.csv to look for images
    - The way to add an image will be to put it in the images folder, and point to it in the news_data.csv file
 
   - find_duplicates.py
     this searches the 3 csv files for potential duplicates and reports them to stdout
     Some of these are not duplicates, but simply have the same title words
   
-## I need to:
+### I need to:
   - add links to capstones
   - add wiiet links (make sure cached, probalby point to that, include spreadsheet)
     It is already a repo: git@bitbucket.org:jturmelle/wiiedu.git
