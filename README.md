@@ -1,7 +1,7 @@
-#This is a repo for FI links serving # filinks
+# This is a repo for FI links serving # filinks
 
-##It has a few pieces.
-  make_fihtml.py 
+## It has a few pieces.
+  - make_fihtml.py 
     uses media_data.csv, news_data.csv, publications_data.csv 
     to generate: financial_instruments.html
     This is a list based on https://iri.columbia.edu/topics/financial-instruments/
@@ -11,40 +11,40 @@
     It creates a cache directory and when activated makes the html point to the cache
     It needs to be thought through (and perhaps not sit in the repo, but be more of a backup)
 
-##Only needed to migrate out of old IRI page:
-  scrape_images.py
+## Only needed to migrate out of old IRI page:
+  - scrape_images.py
     scrapes https://iri.columbia.edu/topics/financial-instruments/
     generates image_data.csv and a directory of cached images called images
     Should only need to be run the first time Im pulling from the IRI website
- images2news_data.py
+ - images2news_data.py
    This takes the images scraped above, and adds them to a imagename column in the news_data.csv file.
  
-##Now make_fihtml.py code is updated to use imagename column in the news_data.csv to look for images
-   The way to add an image will be to put it in the images folder, and point to it in the news_data.csv file
+## Now make_fihtml.py code is updated to use imagename column in the news_data.csv to look for images
+   - The way to add an image will be to put it in the images folder, and point to it in the news_data.csv file
 
-  find_duplicates.py
+  - find_duplicates.py
     this searches the 3 csv files for potential duplicates and reports them to stdout
     Some of these are not duplicates, but simply have the same title words
   
-##I need to:
-  -add links to capstones
-  -add wiiet links (make sure cached, probalby point to that, include spreadsheet)
+## I need to:
+  - add links to capstones
+  - add wiiet links (make sure cached, probalby point to that, include spreadsheet)
     It is already a repo: git@bitbucket.org:jturmelle/wiiedu.git
     Ive asked Jeff to move it to https://github.com/ccsfist 
     We should change it to be directly hosted on github.io
-  -check for broken links, decide what to do
-  -make sure everything is cached, if only backups
-  -make a version that can create short lists of stuff for donors/partners
-  -figure out where to host for real version
-  -Columbia commons cant be scraped, emailed ac@columbia.edu asking about their many APIs...
+  - check for broken links, decide what to do
+  - make sure everything is cached, if only backups
+  - make a version that can create short lists of stuff for donors/partners
+  - figure out where to host for real version
+  - Columbia commons cant be scraped, emailed ac@columbia.edu asking about their many APIs...
     Should add to publications csv, find duplicates, ask which/both or if already commons just skip
-  -Use ai to figure out which are not public domain, strategically use iri server with password. 
-  -formatting?
-  -Plan for updating publications (not duplicate with commons)
-  -Make category that hovers near the top always
+  - Use ai to figure out which are not public domain, strategically use iri server with password. 
+  - formatting?
+  - Plan for updating publications (not duplicate with commons)
+  - Make category that hovers near the top always
 
 
-  Broken links Ive found:
+  ## Broken links Ive found:
   Both of these:
       --- Entry 1 (MEDIA from media_data.csv) ---
       title               : A global index insurance design for agriculture
