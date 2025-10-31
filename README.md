@@ -3,6 +3,8 @@
 ### Immediate next steps:
   - fix find_pubdub.py so that it does not write 6.0 as month, but just writes 6 (no decimal places at all needed for numbers).
   - then test and change it so that it overwrites publications_data.csv instead of creating a new file
+  - Make python that creates acacemic.json
+  - perhaps simplify rules of pubdub.py, pulling more info from academic commons
 
 ### It has a few pieces.
   - make_fihtml.py 
