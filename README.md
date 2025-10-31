@@ -38,14 +38,15 @@
   - figure out where to host for real version
   - Columbia commons emailed ac@columbia.edu asking about their many APIs, 
     - They pointed me to https://urldefense.com/v3/__https://web.archive.org/web/20250902075915/https:/*petstore.swagger.io/?url=https*3A*2F*2Facademiccommons.columbia.edu*2Fapi*2Fv1*2Fswagger_doc**Asearch*getApiV1Search__;LyUlJSUlJSMvLw!!BDUfV1Et5lrpZQ!XaGbAEYpw_F7_QZWvuzJ01LiZjHq_YjpN45ATbGrcxIEYG1TKBd7yaxea2JcQ6HbusgSUC-9B02RXC2lfD5WTbVo$
-    - the query (from gemini) seems to give me all the info I need to generate a csv:
+    - the query (from gemini) seems to give me all the info I need to generate a csv
       - https://academiccommons.columbia.edu/api/v1/search?q=Daniel+Osgood&per_page=100&page=1
-    - Next steps
-      - have Gemini make a script that updates publications csv,
-      - replaces existing links (based on title) to new one EXCEPT FOR JOURNAL PUBS
-      - find duplicates, ask which/both or if already commons just skip
+      - do this query manually in your browser (until it is set up automatically)
+      - save this to academic.json then...
+    -  python add_commons2publications.py
+      - updates publications csv,
+      - replaces existing links (based on title)
+      - does not find duplicates!
       - add new ones
-      - Note that many of the existing links to IRI reports are now on academic commons and are broken in the html until updated
   - Use ai to figure out which are not public domain, strategically use iri server with password. 
   - formatting?
   - Make category that hovers near the top always?
