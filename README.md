@@ -1,5 +1,9 @@
 # This is a repo for FI links serving # filinks
 
+### Immediate next steps:
+  - fix find_pubdub.py so that it does not write 6.0 as month, but just writes 6 (no decimal places at all needed for numbers).
+  - then test and change it so that it overwrites publications_data.csv instead of creating a new file
+
 ### It has a few pieces.
   - make_fihtml.py 
     uses media_data.csv, news_data.csv, publications_data.csv 
@@ -46,6 +50,8 @@
       - updates publications csv,
       - replaces existing links (based on title)
       - does not find duplicates!
+      - find_pubdup.py should allow you to find duplicates, and pick which items you want to keep
+        - note that academic commons hides journals, so probably want to keep a mix of them
       - add new ones
   - Use ai to figure out which are not public domain, strategically use iri server with password. 
   - formatting?
