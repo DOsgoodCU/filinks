@@ -90,13 +90,31 @@ def cache_link(url: str, title: str, should_cache: bool) -> str:
 
 
 def extract_link_info(link_column_value: str) -> tuple[str, str]:
-    """Extracts the title and URL from the complex <a> tag string in publications data."""
+    """
+    Extracts the title and URL from the complex <a> tag string in publications data, 
+    or treats the entire value as a title and a plain URL if no <a> tag is found.
+    """
+       
     # Regex to capture the URL (group 1) and the Title (group 2)
-    match = re.search(r'<a href=[\"|\'](.*?)[\"|\']>(.*?)</a>', link_column_value)
+    # The regex is permissive of single quotes, double quotes, or no quotes around the URL.
+    match = re.search(r'<a href=(?:[\"|\']?)(.*?)(?:[\"|\']?)>(.*?)</a>', link_column_value)
+    
     if match:
-        # Returns (Title, URL)
-        return match.group(2).strip(), match.group(1).strip()
-    return link_column_value.strip(), '#'
+        # If <a> tag found: Title is link content, URL is href value.
+        title = match.group(2).strip()
+        url = match.group(1).strip()
+        return title, url
+    else:
+        # If no <a> tag found: Treat the entire value as both the Title and the URL.
+        # This handles the case where a plain URL is entered into the publications 'url' column.
+        plain_value = link_column_value.strip()
+        # Basic check to see if it looks like a URL (starts with http or www)
+        if plain_value.lower().startswith('http') or plain_value.lower().startswith('www.'):
+            # If it looks like a URL, use it for both title (temporarily) and link
+            return plain_value, plain_value
+        else:
+            # Fallback for truly unstructured data
+            return plain_value, '#'
 
 
 def try_parse_news_date(date_str: str) -> datetime:
@@ -235,9 +253,21 @@ def parse_csv_data(filename: str, data_type: str, should_cache: bool, image_map:
                 elif data_type == 'publications':
                     # Publications Data: url (contains link/title), published_year, published_month, authors, journal, volume, issue, publisher
                     try:
-                        # Use empty string default for url to prevent KeyError
-                        title, link = extract_link_info(row.get('url', ''))
+                        # --- FIX: Ensure title is not just the raw URL if a plain URL was provided ---
+                        raw_url_value = row.get('url', '')
+                        title, link = extract_link_info(raw_url_value)
                         
+                        # If extract_link_info returned a raw URL as the title,
+                        # try to find a better title if one of the other fields is suitable.
+                        if title == link or title == '#':
+                            # Prioritize the journal name, then the raw URL, as the title if a title wasn't extracted from an <a> tag
+                            # Note: This is an educated guess for a missing title in publication data.
+                            better_title = row.get('journal', '') or raw_url_value
+                            if better_title:
+                                title = better_title.strip()
+                            else:
+                                title = 'Publication Link' # Final fallback title
+
                         # Year is required for a meaningful entry; skip if invalid
                         try:
                             # Use 0 as a default for non-existent/invalid year for the check below
@@ -519,4 +549,3 @@ if __name__ == '__main__':
     # When running the script, the links will be cached in the 'cached' directory if --cache is used.
     # If the download fails, the original external URL will be used in the HTML.
     main()
-
