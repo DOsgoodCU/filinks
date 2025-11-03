@@ -2,12 +2,16 @@ import pandas as pd
 import re
 from difflib import SequenceMatcher
 
+# === CONFIG ===
 URL_COL = 'url'
 SIMILARITY_THRESHOLD = 0.7
 INPUT_FILE = "publications_data.csv"
 OUTPUT_FILE = "publications_data_deduped.csv"
 
+# === TEXT UTILITIES ===
+
 def extract_href_and_text(url_html):
+    """Extract href and visible text from an HTML <a> tag."""
     if pd.isna(url_html):
         return "", ""
     text = str(url_html)
@@ -16,40 +20,55 @@ def extract_href_and_text(url_html):
     visible = re.sub(r"<[^>]+>", "", text).strip()
     return href, visible
 
+
 def extract_combined_url_text(url_html):
+    """Normalize the URL by combining href and visible parts."""
     href, visible = extract_href_and_text(url_html)
     combined = f"{href} {visible}".lower()
     return re.sub(r"[^a-z0-9 ]", " ", combined)
 
+
 def similarity(a, b):
+    """Compute a string similarity ratio."""
     a = "" if pd.isna(a) else str(a)
     b = "" if pd.isna(b) else str(b)
     return SequenceMatcher(None, a, b).ratio()
 
+
 def print_full_entry(df, idx):
+    """Pretty-print a full entry with href/text split."""
     print(f"\nRow {idx}:")
     print("=" * 80)
     href, visible = extract_href_and_text(df.loc[idx, URL_COL])
-    print(f"HREF:   {href}")
-    print(f"TEXT:   {visible}")
+    print(f"HREF: {href}")
+    print(f"TEXT: {visible}")
     for col in df.columns:
         if col != URL_COL and not col.startswith("__"):
             print(f"{col.upper()}: {df.loc[idx, col]}")
     print("=" * 80)
 
+
 def smart_cast(value):
-    """Cast numbers to int if they look like whole numbers, otherwise leave as str."""
+    """Clean numeric-looking strings and remove unnecessary decimals."""
     if pd.isna(value):
         return ""
     s = str(value).strip()
-    # if looks like a whole float (e.g. '12.0' or '2015.0')
     if re.fullmatch(r"\d+\.0+", s):
         return str(int(float(s)))
-    # if looks like a general float (e.g. '12.34')
     elif re.fullmatch(r"\d+\.\d+", s):
-        return str(float(s))
-    else:
-        return s
+        return str(float(s)).rstrip('0').rstrip('.')
+    return s
+
+
+def clean_dataframe(df):
+    """Clean entire dataframe at the end — remove .0 and cast as strings."""
+    df_clean = df.copy()
+    for col in df_clean.columns:
+        df_clean[col] = df_clean[col].map(smart_cast)
+    return df_clean
+
+
+# === MAIN SCRIPT ===
 
 def main():
     pd.set_option('display.max_colwidth', None)
@@ -90,10 +109,7 @@ def main():
                             else:
                                 merged_row[col] = smart_cast(sel)
                     for k, v in merged_row.items():
-                        try:
-                            df.at[i, k] = v
-                        except Exception:
-                            df.at[i, k] = str(v)
+                        df.at[i, k] = v
                     df = df.drop(index=j).reset_index(drop=True)
                     df.at[i, "__url_norm"] = extract_combined_url_text(df.loc[i, URL_COL])
                     print(f"✅ Merged and updated. ({len(df)} rows remaining)")
@@ -106,8 +122,9 @@ def main():
         i += 1
 
     df = df[[c for c in df.columns if not c.startswith("__")]]
+    df = clean_dataframe(df)
     df.to_csv(OUTPUT_FILE, index=False)
-    print(f"\n✅ Deduplicated file saved to {OUTPUT_FILE}")
+    print(f"\n✅ Deduplicated file saved to {OUTPUT_FILE} (cleaned of .0 artifacts)")
 
 if __name__ == "__main__":
     main()
