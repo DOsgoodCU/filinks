@@ -54,7 +54,13 @@
       - does not find duplicates!
       - find_pubdup.py should allow you to find duplicates, and pick which items you want to keep
         - note that academic commons hides journals, so probably want to keep a mix of them
-      - add new ones
+      - keep copy of original publications data
+      - until this is cleaned up, you need to
+        - python add_commons2publications.py
+        - python find_pubdup.py
+        - cp publications_data_deduped.csv publications_data.csv
+        - python make_fihtml.py
+        - cp financial_instruments.html index.html
   - Use ai to figure out which are not public domain, strategically use iri server with password. 
   - formatting?
   - Make category that hovers near the top always?
