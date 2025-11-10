@@ -67,6 +67,7 @@
 
 ### Things for simplifying operational version
   - make find_pubdub.py write over publications file, allow it to pick an entire option (instead of only all the fields one by one)
+    - make pubdub work for combined csvs, have file that saves ones that are NOT duplicates
   - combine media_data.csv, news_data.csv, publications_data.csv into a single csv file
   - make it save to index.html instead of financial_instruments.html
   - clean up add_commons2publications, make_fihtml workflow
