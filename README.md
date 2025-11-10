@@ -36,8 +36,8 @@
   - add tracking
   - update wiiet links to our repo, include pdf, spreadsheet
     It is already a repo: git@bitbucket.org:jturmelle/wiiedu.git
-    Ive asked Jeff to move it to https://github.com/ccsfist 
-    We should change it to be directly hosted on github.io
+   Jeff has moved it to https://github.com/ccsfist 
+    I changed it to be directly hosted on github.io
   - check for broken links, decide what to do
   - make sure everything is cached, if only backups
   - make a version that can create short lists of stuff for donors/partners
