@@ -36,8 +36,8 @@
   - add tracking
   - update wiiet links to our repo, include pdf, spreadsheet
     It is already a repo: git@bitbucket.org:jturmelle/wiiedu.git
-    Ive asked Jeff to move it to https://github.com/ccsfist 
-    We should change it to be directly hosted on github.io
+   Jeff has moved it to https://github.com/ccsfist 
+    I changed it to be directly hosted on github.io
   - check for broken links, decide what to do
   - make sure everything is cached, if only backups
   - make a version that can create short lists of stuff for donors/partners
@@ -67,6 +67,7 @@
 
 ### Things for simplifying operational version
   - make find_pubdub.py write over publications file, allow it to pick an entire option (instead of only all the fields one by one)
+    - make pubdub work for combined csvs, have file that saves ones that are NOT duplicates
   - combine media_data.csv, news_data.csv, publications_data.csv into a single csv file
   - make it save to index.html instead of financial_instruments.html
   - clean up add_commons2publications, make_fihtml workflow
