@@ -1,13 +1,24 @@
 # This is a repo for FI links serving # filinks
 
-### Immediate next steps:
-  - this version is a transition version
+### It includes a lot of one time code for converting and setting up first index.html and associated files, simple operational production version is at https://ccsfist.github.io/filist/
       - it has the old multiple csv file in multifile directory
       - it has a new single csv file format in singlefile directory, and has script2combinedcsv directory with the python script I used to merge into 1 csv
       - next version will have google tracking
       - need to add features to include new pubs, look for duplicates across merged csv file, keep image cache working with new documents
       - forcerank column in csv file that allows you to have items sit near the top of the html, irregardless of the date
 
+### Immediate next steps:
+   - need to add features to include new pubs, look for duplicates across merged csv file, keep image cache working with new documents
+   - forcerank column in csv file that allows you to have items sit near the top of the html, irregardless of the date
+   - check for broken links (perhaps keeping them in the list as a kind of cv, but not active)
+   - cache as much as possible from the IRI data library and other less permanent sources, perhaps not to this repo/html, but somewhere!
+
+### Important functionality to develop
+  - test for broken links
+  - make more general script to query Academic Commons once they update their API
+  - make duplicate link detector (some early attempts for single csv file in filinks)
+    -this will be important for when academic commons script is done, as we will want journals to be linked to when there are links to both academic commons and also to journals
+ 
 ### It has a few pieces.
   - make_fihtml.py 
     uses media_data.csv, news_data.csv, publications_data.csv 
