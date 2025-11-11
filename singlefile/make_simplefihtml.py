@@ -259,7 +259,20 @@ def generate_html(entries: List[Dict[str, Any]]) -> str:
 
         html_entries.append(html_content)
         
-    # --- HTML Shell (Removed caching configuration from earlier version) ---
+    # --- Google Analytics 4 Tracking Code ---
+    GA_TRACKING_CODE = """
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YM4PVFJE0F"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-YM4PVFJE0F');
+    </script>
+    """
+
+    # --- HTML Shell ---
+    # GA_TRACKING_CODE is inserted after the title tag in the <head>
     HTML_SHELL = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -267,6 +280,7 @@ def generate_html(entries: List[Dict[str, Any]]) -> str:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Instrument Links</title>
+    {GA_TRACKING_CODE}
     <style>
         
         /* Set full browser window background to white */
