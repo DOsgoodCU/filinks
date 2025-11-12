@@ -12,7 +12,7 @@
    - forcerank column in csv file that allows you to have items sit near the top of the html, irregardless of the date
    - check for broken links (perhaps keeping them in the list as a kind of cv, but not active)
    - cache as much as possible from the IRI data library and other less permanent sources, perhaps not to this repo/html, but somewhere!
-   - simplify formatting of the unified csv file.  It currently has redundant and unused columns depending on the kind of pub. Examples ive noticed so far:
+   - simplify formatting of the unified csv file--its wierd because it is an AI merging of 3 spreadsheets for entries of 3 types of publications.  It currently has redundant and unused columns depending on the kind of pub. Examples ive noticed so far:
      - The title of a publication must be hardcoded in the url for publications, but can be entered directly for other items
      - Author list is in several columns, probably used differently depending on the entry category.
 
